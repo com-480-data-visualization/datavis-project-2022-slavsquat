@@ -1,4 +1,4 @@
-# datavis-project-2022-slavsquat
+# To live or not to live... in Barcelona (name can be changed)
 This project is done by the **Slavsquat**:
 1. Zoran Kascelan
 2. Tikhon Parshikov
