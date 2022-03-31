@@ -22,9 +22,9 @@ For conducting the first analysis, we used the pandas library in python 3.9, and
 To back up our findings, we are providing the following plots.
 
 <p align="center">
-  <img src="images/immigrants from spain.png" height="230" />
-  <img src="images/immigrants from spain.png" height="230" />
-  <img src="images/immigrants from spain.png" height="230" />
+  <img src="images/im_by_ne.png"/>
+  <img src="images/top15.png"/>
+  <img src="images/immigrants from spain.png"/>
 </p>
 
 ## Related work
