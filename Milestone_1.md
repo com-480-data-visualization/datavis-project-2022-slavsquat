@@ -27,4 +27,15 @@ To back up our findings, we are providing the following plots.
   <img src="images/immigrants from spain.png"/>
 </p>
 
+<p align="center">
+  <img src="images/im_by_ne.png"/>
+  <img src="images/top15.png"/>
+  <img src="images/immigrants from spain.png"/>
+</p>
+
+<p align="center">
+  <img src="images/immigrants from spain.png"/>
+  Caption
+</p>
+
 ## Related work
