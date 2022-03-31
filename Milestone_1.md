@@ -49,12 +49,12 @@ To back up our findings, we are providing the following plots.
 </p>
 
 ## 4. Related work
-- *Data exploration made by others*
+**Data exploration made by others**
 
 As it was said previously, the dataset we are going to use is taken from Kaggle. That is why there were a few attempts to work with this data. Most of them have not had a lot of visualization (just several base plots written on Python to analyze some exact problem). Also, there was one very good exploration of the dataset with a lot of images written on R language. But this exploration is mostly like an overview and does not provide answers to some exact questions.
 
-- *Originality of our approach*
+**Originality of our approach**
 
 We are going to create dynamic visualization that can help us to answer the questions mentioned above.  
 
-- *Sources of inspiration*
+**Sources of inspiration**
