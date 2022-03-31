@@ -1,5 +1,5 @@
 # To live or not to live... in Barcelona (name can be changed)
-This project is done by the **Slavsquat**:
+This project is done by **Slavsquat**:
 - Zoran Kascelan
 - Tikhon Parshikov
 - Jovana Segrt
@@ -12,7 +12,7 @@ This project is done by the **Slavsquat**:
 - Milestone 2 (due to 6th of May 17:00)
 
 
-- Milestone 3 (due to 3rd of JJune 17:00)
+- Milestone 3 (due to 3rd of June 17:00)
 
 ## Running the project
 
