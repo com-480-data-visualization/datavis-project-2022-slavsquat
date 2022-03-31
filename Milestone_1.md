@@ -1,14 +1,22 @@
 # Milestone 1 - Data Visualization project on the Barcelona dataset
 
-## Dataset
+## 1. Problematic
+
+### 1.1 Overview
 
 Being ranked very high one the list of best places to live in Europe, Barcelona represents an attractive location for pepople all around the world when it comes to residential choice, holidays, personal and business meet-ups, conferences, etc. Having beautiful architecture, wonderful food, excellent public transportation and amazing weather, it hosts around seven million visitors annually and organizes more than 1000 events. With all daily news, that is presented outside the Spain, normally going into this direction, most of people started associating Barcelona only with previously mentioned points, which has consequenly ensured its steady development and growth over the last 20 years. However, little could be read about the big immigration it has, as well as about the number of accidenets and deaths happening. Moreover, insignificantly small number of studies has been conducted so far, trying to find correlations between different events happened and the city organization itself (e.g. number of accidents in different neighbourhoods to increase safety of the population), in order to improve the its structure and make changes.  
 
-Acknowledged by Barcelona City Council and Barcelona Digital City, Barcelona data set consists of different subsets containg the information about various aspects of the city, offering a possibility to tackle many issues. Ones that are going to be used in this study are deaths.csv, population.csv, immigrants_by_nationality.csv, immigrants_emigrants_by_age.csv, immigrants_emigrants_by_destination.csv, immigrants_emigrants_by_destination2.csv, immigrants_emigrants_by_sex.csv and accidents_2017.csv, containing the data about population in different Barcelona neighbourhoods, accidents and immigration statistics. 
+### 1.2 Our goals
 
-## Problematic
+- What is the safest neighborhood in Barcelona? Describing the safety of Barcelona neighborhoods. : In this question we would like to address and analyze the problem of accidents happening in Barcelona, in order to see if the safest neighborhood could be determined. The answer to this question would help many people that are moving in Barcelona make a decision on where to search for the apartment, especially if they have kids. On the other hand, the information results could be used by the authorities to provoke further analysis on why are certain neighborhoods unsafe, and if they can do something in order to tackle this issue and create safe environment for living in all Barcelona neighborhoods.
 
-## Exploratory data analysis
+- What is the overall popularity of living in Barcelona? :  Here we would analyze all the data provided in the Barcelona data sets and make visualizations which could be later used and assessed by people who are trying to see if Barcelona is the right place for them.  
+
+## 2. Dataset
+
+Acknowledged by Barcelona City Council and Barcelona Digital City, Barcelona data set consists of different subsets containg the information about various aspects of the city, offering a possibility to tackle many issues. Ones that are going to be used in this study are deaths.csv, population.csv, immigrants_by_nationality.csv, immigrants_emigrants_by_age.csv, immigrants_emigrants_by_destination.csv, immigrants_emigrants_by_destination2.csv, immigrants_emigrants_by_sex.csv and accidents_2017.csv, containing the data about population in different Barcelona neighbourhoods, accidents and immigration statistics.
+
+## 3. Exploratory data analysis
 
 In this section we are providing some basic statistics of our dataset alongside a few insightful graphs.
 
@@ -36,4 +44,4 @@ To back up our findings, we are providing the following plots.
   Number of immigrants from other parts of Spain to Barcelona
 </p>
 
-## Related work
+## 4. Related work
