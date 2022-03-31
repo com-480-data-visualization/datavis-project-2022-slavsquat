@@ -40,7 +40,7 @@ It should be mentioned that this dataset is cleaned. There is no poor-quality da
 
 In this section, we are providing some basic statistics of our dataset alongside a few insightful graphs.
 
-For conducting the first analysis, we used the pandas library in python 3.9, and the work can be found in this notebook. Some of the main conclusions we made are:
+For conducting the first analysis, we used the pandas library in python 3.9, and the work can be found in [this notebook](exploration/datavizEDA.ipynb). Some of the main conclusions we made are:
 
 - There is information about 74 neighborhoods in Barcelona in our dataset.
 - Most popular names in Barcelona are Maria (38346 records), Antonio (33091 records), and Montserrat (32480 records).
