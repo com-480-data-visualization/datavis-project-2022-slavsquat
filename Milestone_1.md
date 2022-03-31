@@ -23,19 +23,17 @@ To back up our findings, we are providing the following plots.
 
 <p align="center">
   <img src="images/im_by_ne.png"/>
-  <img src="images/top15.png"/>
-  <img src="images/immigrants from spain.png"/>
+  Number of immigrants by neighborhood
 </p>
 
 <p align="center">
-  <img src="images/im_by_ne.png"/>
   <img src="images/top15.png"/>
-  <img src="images/immigrants from spain.png"/>
+  Top 15 countries by number of immigrants to Barcelona
 </p>
 
 <p align="center">
   <img src="images/immigrants from spain.png"/>
-  Caption
+  Number of immigrants from other parts of Spain to Barcelona
 </p>
 
 ## Related work
