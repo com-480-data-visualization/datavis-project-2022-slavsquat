@@ -8,9 +8,13 @@ Being ranked very high one the list of best places to live in Europe, Barcelona 
 
 ### 1.3 Motivation and Target audience
 
-Nowadays, living in the fast-pace world, when people are getting more and more flexible about living abroad and feel more adaptable to changing environments, information about if the city meets their needs in terms of, for example, transportation and environment, considering how 
+Nowadays, living in the fast-pace world, when people are getting more and more flexible about living abroad and feel more adaptable to changing environments, information about if the city meets their needs in terms of, for example, transportation and safety of the surrounding could be found useful. Being based on the reliable data source, visualizations which are going to be made in this project could be later used by people all around the world who are considering moving to Barcelona. It will cover the basic information in order to meet the needs of the majority.
 
 ### 1.3 Our goals
+
+Considering the fact that vizualizations are more apealing to the human eye, when being compared with pure statistical data, we believe that represending data through interactive graphs could lead also to a greater understanding of the issue we try to tackle. By providing users with the chance to interactively gain information about the life in Barcelona, we think that they could imagine themselves better in its environment and therefore make the optimal decision about migrating. 
+
+The vizualization we will provide will deal with following questions:
 
 - What is the safest neighborhood in Barcelona? Describing the safety of Barcelona neighborhoods. : In this question we would like to address and analyze the problem of accidents happening in Barcelona, in order to see if the safest neighborhood could be determined. The answer to this question would help many people that are moving in Barcelona make a decision on where to search for the apartment, especially if they have kids. On the other hand, the information results could be used by the authorities to provoke further analysis on why are certain neighborhoods unsafe, and if they can do something in order to tackle this issue and create safe environment for living in all Barcelona neighborhoods.
 
