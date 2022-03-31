@@ -1,5 +1,5 @@
-# To live or not to live... in Barcelona (name can be changed)
-This project is done by **Slavsquat**:
+# To live or not to live ... in Barcelona (name can be changed)
+This project is done by **SlavSquat**:
 - Zoran Kascelan
 - Tikhon Parshikov
 - Jovana Segrt
