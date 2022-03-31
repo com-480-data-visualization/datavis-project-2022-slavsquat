@@ -34,6 +34,7 @@ For conducting the first analysis, we used the pandas library in python 3.9, and
 - Most popular names in Barcelona are Maria (38346 records), Antonio (33091 records), and Montserrat (32480 records).
 - Andalusia is the part of Spain from where the most people migrate to Barcelona.
 - More than 100000 people from Spain migrated to Barcelona from other cities.
+- Of 3162 bus stops in Barcelona, 2324 are day bus stops, and 838 of them are night bust stops.
 
 To back up our findings, we are providing the following plots.
 
