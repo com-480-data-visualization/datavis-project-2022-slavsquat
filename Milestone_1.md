@@ -22,7 +22,19 @@ The vizualization we will provide will deal with following questions:
 
 ## 2. Dataset
 
-The dataset which is going to be used in this analysis is kaggle-one Barcelona data set. Acknowledged by Barcelona City Council and Barcelona Digital City, Barcelona data set consists of different subsets containg the information about various aspects of the city, offering a possibility to tackle many issues. Ones that are going to be used in this study are deaths.csv, population.csv, immigrants_by_nationality.csv, immigrants_emigrants_by_age.csv, immigrants_emigrants_by_destination.csv, immigrants_emigrants_by_destination2.csv, immigrants_emigrants_by_sex.csv and accidents_2017.csv, containing the data about population in different Barcelona neighbourhoods, accidents and immigration statistics.
+The dataset which is going to be used in this analysis is kaggle-one Barcelona [data set] (https://www.kaggle.com/datasets/xvivancos/barcelona-data-sets). Acknowledged by Barcelona City Council and Barcelona Digital City, Barcelona data sets consist of different files containing the information about various aspects of the city, offering a possibility to tackle many issues. Ones that are going to be used in this study are:
+- deaths.csv
+- population.csv
+- immigrants_by_nationality.csv
+- immigrants_emigrants_by_age.csv
+- immigrants_emigrants_by_destination.csv
+- immigrants_emigrants_by_destination2.csv
+- immigrants_emigrants_by_sex.csv 
+- accidents_2017.csv
+
+These files contain the data about population in different Barcelona neighborhoods, accidents and immigration statistics.
+It should be mentioned that this dataset is cleaned. There is no poor-quality data and even there is an **integrity** of same data through different files.
+
 
 ## 3. Exploratory data analysis
 
