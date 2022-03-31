@@ -22,7 +22,7 @@ The vizualization we will provide will deal with following questions:
 
 ## 2. Dataset
 
-The dataset which is going to be used in this analysis is kaggle-one Barcelona [data set] (https://www.kaggle.com/datasets/xvivancos/barcelona-data-sets). Acknowledged by Barcelona City Council and Barcelona Digital City, Barcelona data sets consist of different files containing the information about various aspects of the city, offering a possibility to tackle many issues. Ones that are going to be used in this study are:
+The dataset which is going to be used in this analysis is kaggle-one Barcelona [data set](https://www.kaggle.com/datasets/xvivancos/barcelona-data-sets). Acknowledged by Barcelona City Council and Barcelona Digital City, Barcelona data sets consist of different files containing the information about various aspects of the city, offering a possibility to tackle many issues. Ones that are going to be used in this study are:
 - deaths.csv
 - population.csv
 - immigrants_by_nationality.csv
