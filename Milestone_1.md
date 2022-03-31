@@ -10,4 +10,17 @@ Acknowledged by Barcelona City Council and Barcelona Digital City, Barcelona dat
 
 ## Exploratory data analysis
 
+In this section we are providing some basic statistics of our dataset alongside a few insightful graphs.
+
+For conducting the first analysis, we used the pandas library in python 3.9, and the work can be found in this notebook. Some of the main conclusions we made are:
+
+- There is information about 74 neighborhoods in Barcelona in our dataset.
+- Most popular names in Barcelona are Maria (38346 records), Antonio (33091 records), and Montserrat (32480 records).
+- Andalusia is the part of Spain from where the most people migrate to Barcelona.
+- More than 100000 people from Spain migrated to Barcelona from other cities.
+
+To back up our findings, we are providing the following plots.
+
+
+
 ## Related work
