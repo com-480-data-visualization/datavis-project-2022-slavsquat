@@ -4,9 +4,11 @@
 
 ### 1.1 Overview
 
+<div style="text-align: justify"> 
+
 Being ranked very high on the list of best places to live in Europe, Barcelona represents an attractive location for people all around the world when it comes to residential choices, holidays, personal and business meet-ups, conferences, etc. Having beautiful architecture, wonderful food, excellent public transportation, and amazing weather, it hosts around seven million visitors annually and organizes more than 1000 events. With all daily news, that is presented outside Spain, normally going in this direction, most people started associating Barcelona only with previously mentioned points, which has consequently ensured its steady development and growth over the last 20 years. However, little could be read about the big immigration it has, as well as about the number of accidents and deaths happening. Moreover, an insignificantly small number of studies has been conducted so far, trying to find correlations between different events thet happened and the city organization itself (e.g. the number of accidents in different neighborhoods to increase the safety of the population), in order to improve its structure and make changes.  
 
-### 1.3 Motivation and Target audience
+### 1.2 Motivation and Target audience
 
 Nowadays, living in the fast-paced world, when people are getting more and more flexible about living abroad and feel more adaptable to changing environments, information about if the city meets their needs in terms of, for example, transportation and safety of the surrounding could be found useful. Being based on reliable data source, visualizations that are going to be made in this project could be later used by people all around the world who are considering moving to Barcelona. It will cover the basic information in order to meet the needs of the majority.
 
@@ -76,3 +78,5 @@ As it was said previously, the dataset we are going to use is taken from Kaggle.
 We are going to create dynamic visualization that can help us to answer the questions mentioned above.  
 
 **Sources of inspiration**
+  
+</div>
