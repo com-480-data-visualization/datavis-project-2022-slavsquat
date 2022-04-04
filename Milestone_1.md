@@ -70,8 +70,18 @@ To back up our findings, we are providing the following plots.
 
 As it was said previously, the dataset we are going to use is taken from Kaggle. That is why there were a few attempts to work with this data. Most of them have not had a lot of visualization (just several base plots written in Python to analyze some exact problem). Also, there was one very good exploration of the dataset with a lot of images written in R language. But this exploration is mostly like an overview and does not provide answers to some exact questions.
 
+We are now providing the sources:
+
+- [Discovering Barcelona Part 1](https://www.kaggle.com/code/xvivancos/discovering-barcelona-part-i) - A project intended to demonstrate and visualize all the main points from the dataset. It includes a lot of standard plots combined with a number og interactive maps and a [Sankey diagram](https://en.wikipedia.org/wiki/Sankey_diagram).
+
+- [Discovering Barcelona Part 2](https://www.kaggle.com/code/xvivancos/discovering-barcelona-part-ii) - The follower of the project mentioned above. It is focused more on the interactive maps to help the users better understand the data.
+
+- [Barcelona City - A Comprehensive Study](https://www.kaggle.com/code/gaurav06/barcelona-city-a-comprehensive-study) - This projects includes visulizations in form of bar plots, interactive maps, and a heat map of accidents' locations.
+
 **Originality of our approach**
 
-We are going to create dynamic visualization that can help us to answer the questions mentioned above.
+Even though the mentioned visualization projects from above are very thorough, we will try to create a smaller number of insightful interactive demonstrations that will appeal to the user as a very convenient way of getting answers to the questions they have.
 
 **Sources of inspiration**
+
+For the sources of inspiration we are focusing mostly on our creativity to recognize the needs of people that are thinking of moving to Barcelona.
