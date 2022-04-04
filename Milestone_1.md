@@ -1,4 +1,4 @@
-# Milestone 1 - Data Visualization project on the Barcelona dataset
+# Milestone 1 - Introducing the problem
 
 ## 1. Problematic
 
