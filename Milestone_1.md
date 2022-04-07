@@ -80,7 +80,7 @@ We are now providing the sources:
 
 **Originality of our approach**
 
-Even though the mentioned visualization projects from above are very thorough, we will try to create a smaller number of insightful interactive demonstrations that will appeal to the user as a very convenient way of getting answers to the questions they have.
+Even though the mentioned visualization projects from above are very thorough, we will try to create a smaller number of insightful interactive demonstrations that will appeal to the users as a very convenient way of getting answers to the questions they have.
 
 **Sources of inspiration**
 
