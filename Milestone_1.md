@@ -85,3 +85,5 @@ Even though the mentioned visualization projects from above are very thorough, w
 **Sources of inspiration**
 
 For the sources of inspiration we are focusing mostly on our creativity to recognize the needs of people that are thinking of moving to Barcelona.
+
+Furthermore, we will try to incorporate ideas from some of the interesting visualization projects including interactive maps. Some of the examples could be found on [this link](https://www.tableau.com/learn/articles/interactive-map-and-data-visualization-examples).
