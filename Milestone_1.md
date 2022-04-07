@@ -61,7 +61,7 @@ To back up our findings, we are providing the following plots.
 
 <p align="center">
   <img src="images/immigrants from spain.png"/>
-  Number of immigrants from other parts of Spain to Barcelona
+  Number of immigrants from other parts of Spain that migrated to Barcelona
 </p>
 
 ## 4. Related work
