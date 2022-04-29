@@ -14,6 +14,8 @@ The object of this milestone was finding the dataset, perform exploratory analys
 
 **🥘 Milestone 2 (due 6th of May 17:00)**
 
+Results of this milestone should provide a clear overview of the project goals. Furthermore, the primar drafts of the visualizations should be included with a defined way of how they will be implemented.
+
 
 **🏝 Milestone 3 (due 3rd of June 17:00)**
 
