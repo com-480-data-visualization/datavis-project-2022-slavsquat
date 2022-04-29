@@ -10,7 +10,7 @@ This project is done by the team **SlavSquat**:
 
 The object of this milestone was finding the dataset, perform exploratory analysis, define our problem, and set our goals - what will our visualization show.
 
-📕 [Milestone 1 report](Milestone_1.md)
+📕 The report for the first milestone could be read at [Milestone 1 report](Milestone_1.md).
 
 **🥘 Milestone 2 (due 6th of May 17:00)**
 
