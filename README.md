@@ -16,6 +16,8 @@ The object of this milestone was finding the dataset, perform exploratory analys
 
 Results of this milestone should provide a clear overview of the project goals. Furthermore, the primar drafts of the visualizations should be included with a defined way of how they will be implemented.
 
+📕 The report for the second milestone could be read at ______
+
 
 **🏝 Milestone 3 (due 3rd of June 17:00)**
 
