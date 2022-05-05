@@ -1,11 +1,11 @@
 # To live or not to live ... in Barcelona 🇪🇸 
-This project is done by the team **SlavSquat**:
+This project is done by the team **SlavSquat** for the COM-480 course 'Data Visualization' at EPFL:
 
-- Zoran Kascelan
+- Zoran Kascelan 
 - Tikhon Parshikov
 - Jovana Segrt
 
-## The project work consists of 3 parts
+## Project outline
 ### **💃🏻 Milestone 1 (due 8th of April 17:00)**
 
 The object of this milestone was finding the dataset, perform exploratory analysis, define our problem, and set our goals - what will our visualization show.
