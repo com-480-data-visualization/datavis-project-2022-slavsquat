@@ -23,3 +23,13 @@ Results of this milestone should provide a clear overview of the project goals. 
 
 ## Running the project
 
+For running our website a series of step could be performed in order to easily preview the visualizations:
+
+1. Download the code as ZIP
+2. Import the code into Visual Studio Code IDE
+3. Open the index.html file
+4. From the sidebar in Visual Studio Code IDE select the 'Extensions' tab
+5. Search for 'Live Server' extension and install it
+6. Click the 'Go live' button from the status bar in the bottom-right corner of the Visual Studio Code IDE
+7. You will be redirected to the browser and get the information about the port on which the server has started
+
