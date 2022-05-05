@@ -6,7 +6,7 @@ This project is done by the team **SlavSquat**:
 - Jovana Segrt
 
 ## The project work consists of 3 parts
-**💃🏻 Milestone 1 (due 8th of April 17:00)**
+### **💃🏻 Milestone 1 (due 8th of April 17:00)**
 
 The object of this milestone was finding the dataset, perform exploratory analysis, define our problem, and set our goals - what will our visualization show.
 
