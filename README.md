@@ -16,13 +16,13 @@ The object of this milestone was finding the dataset, perform exploratory analys
 
 Results of this milestone provide a clear overview of the project goals. Furthermore, the primar drafts of the visualizations are included with a defined way of how they will be implemented.
 
-📕 The report for the second milestone could be read at [Milestone 2](Milestone_2.pdf) and seen at [Initial website](index.html).
+📕 The report for the second milestone could be read at [Milestone 2 report](Milestone_2.pdf) and seen at [initial website](index.html).
 
 ### **🏝 Milestone 3 (due 3rd of June 17:00)**
 
 ## Running the project
 
-For running our website a series of step should be performed in order to easily preview the visualizations:
+For running our website a series of steps should be performed in order to easily preview the visualizations:
 
 1. Download the code as ZIP
 2. Import the code into [Visual Studio Code IDE](https://code.visualstudio.com/)
