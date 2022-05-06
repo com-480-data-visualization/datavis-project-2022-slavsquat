@@ -22,7 +22,7 @@ Results of this milestone provide a clear overview of the project goals. Further
 
 ## Running the project
 
-For running our website a series of step could be performed in order to easily preview the visualizations:
+For running our website a series of step should be performed in order to easily preview the visualizations:
 
 1. Download the code as ZIP
 2. Import the code into [Visual Studio Code IDE](https://code.visualstudio.com/)
