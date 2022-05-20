@@ -78,8 +78,9 @@
             <h2 class="text-center">Vis1</h2>
             <div class="row">
                 <div class="col-lg-6">
-                    <img src="images/sketch.jpg" class="img-fluid img-thumbnail" alt="Sketch picture">
-                    <p>This is the skeleton for the visualisations </p>
+                    <svg id="map-plot" viewBox="0 0 1000 550" width="1000" height="550">
+                        
+                    </svg>
                 </div>
             </div>
         </div>
@@ -144,8 +145,31 @@
 
 <script src="https://kit.fontawesome.com/2f8ed0a4d3.js" crossorigin="anonymous"></script>
 <script src="lib/jquery-3.6.0.min.js"></script>
-<script src="lib/popper.min.js"></script>
 <script src="lib/js/bootstrap.min.js"></script>
 <script src="js/app.js"></script>
-<script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="//d3js.org/d3.v5.min.js"charset="utf-8"></script>
+<script src="//d3js.org/topojson.v3.min.js"></script>
+<script>
+
+    var width = 1160,
+    height = 960;
+
+    const svg = d3.select("svg");
+    const path = d3.geoPath();
+
+    d3.json("data/big_neighborhoods.json")
+  .then(barcelona => {
+    svg
+      .append('path')
+      .attr('d', path(topojson.mesh(barcelona)))
+      .attr('fill', 'none')
+      .attr('stroke', 'black');
+  })
+  .catch(err => console.warn(err));
+
+    console.log('ciao')
+
+    
+</script>
+
 </html>
