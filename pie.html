@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+
+<script src="https://d3js.org/d3.v6.js"></script>
+
+<button onclick="update(data1)" class="btn">Morning</button>
+<button onclick="update(data2)" class="btn">Afternoon</button>
+<button onclick="update(data3)" class="btn">Night</button>
+
+<div id="my_dataviz"></div>
+
+<script>
+
+    
+    const width = 500,
+        height = 500,
+        margin = 80;
+    
+    
+    const radius = Math.min(width, height) / 2 - margin;
+    
+    
+    const svg = d3.select("#my_dataviz")
+      .append("svg")
+        .attr("width", width)
+        .attr("height", height)
+      .append("g")
+        .attr("transform", `translate(${width/2}, ${height/2})`);
+    
+    // create the data variables from accidents_part_of_the_day.csv
+    const data1 = {CV: 211, E: 1194, G:199, HG:306, LC:284, NB:200, SA:227, SM:558, SMo:464, SSG:411}
+    const data2 = {CV: 292, E: 1478, G:267, HG:352, LC:378, NB:280, SA:308, SM:632, SMo:509, SSG:574}
+    const data3 = {CV: 97, E: 357, G:65, HG:85, LC:64, NB:62, SA:62, SM:146, SMo:131, SSG:119}
+    
+    // set the color scale
+    const color = d3.scaleOrdinal()
+      .range(["#1f77b4","#ff7f0e","#2ca02c","#d62728","#9467bd","#8c564b","#e377c2","#7f7f7f","#bcbd22","#17becf"]);
+
+      // build the arcs
+    var arcGenerator = d3.arc()
+        .innerRadius(0)
+        .outerRadius(radius)
+
+        // build the arcs for the labels
+    var arcGenerator2 = d3.arc()
+        .innerRadius(0)
+        .outerRadius(radius*1.55)
+    
+    // the function that is used to create the pie chart
+    function update(data) {
+    
+      // Compute the position of each group on the pie:
+      const pie = d3.pie()
+        .value(function(d) {return d[1]; })
+        .sort(function(a, b) { return d3.ascending(a.key, b.key);} ) // This make sure that group order remains the same in the pie chart
+      const data_ready = pie(Object.entries(data))
+    
+      // map to data
+      const u = svg.selectAll("path")
+        .data(data_ready)
+    
+      // Build the pie chart: Basically, each part of the pie is a path that we build using the arc function.
+      svg
+  .selectAll('mySlices')
+  .data(data_ready)
+  .join('path')
+  .merge(u)
+    .transition()
+    .duration(2000)
+    .attr('d', arcGenerator)
+    .attr('fill', function(d){ return(color(d.data[0])) })
+    .attr("stroke", "white")
+    .style("stroke-width", "2px")
+    .style("opacity", 1)
+
+    svg
+  .selectAll('mySlices')
+  .data(data_ready)
+  .join('text')
+  .text(function(d){ return d.data[0] + ": " + d.data[1]})
+  .attr("transform", function(d) { return `translate(${arcGenerator2.centroid(d)})`})
+  .style("text-anchor", "middle")
+  .style("font-size", 17)
+
+    
+    }
+    
+    // Initialize the plot with the first dataset
+    update(data1)
+    </script>

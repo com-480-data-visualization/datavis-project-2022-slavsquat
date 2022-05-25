@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+
+<!-- Load d3.js -->
+<script src="https://d3js.org/d3.v6.js"></script>
+
+<!-- Create a div where the graph will take place -->
+<div id="my_dataviz2"></div>
+
+<!-- A bit of CSS: change stroke color of circle on hover (white -> black) -->
+<style>
+  .bubbles {
+    stroke-width: 2px;
+    stroke: white;
+  }
+  .bubbles:hover {
+    stroke: turquoise;
+  }
+</style>
+
+<script>
+
+    // set the dimensions and margins of the graph
+    const margin2 = {top: 10, right: 20, bottom: 30, left: 50},
+        width2 = 500 - margin2.left - margin2.right,
+        height2 = 420 - margin2.top - margin2.bottom;
+    
+    // append the svg object to the body of the page
+    const svg2 = d3.select("#my_dataviz")
+      .append("svg")
+        .attr("width", width2 + margin2.left + margin2.right)
+        .attr("height", height2 + margin2.top + margin2.bottom)
+      .append("g")
+        .attr("transform", `translate(${margin2.left},${margin2.top})`);
+    
+    //Read the data
+    d3.csv("data/accidents_bubble.csv").then( function(data) {
+    
+      // Add X axis
+      const x = d3.scaleLinear()
+        .domain([200, 3600])
+        .range([ 0, width2 ]);
+      svg2.append("g")
+        .attr("transform", `translate(0, ${height2})`)
+        .call(d3.axisBottom(x))
+        .style("color", "white");
+    
+      // Add Y axis
+      const y = d3.scaleLinear()
+        .domain([100, 1700])
+        .range([ height2, 0]);
+      svg2.append("g")
+        .call(d3.axisLeft(y))
+        .style("color", "white");
+    
+      // Add a scale for bubble size
+      const z = d3.scaleLinear()
+        .domain([0, 2000])
+        .range([ 4, 40]);
+    
+
+      // -1- Create a tooltip div that is hidden by default:
+      const tooltip = d3.select("#my_dataviz2")
+        .append("div")
+          .style("opacity", 0)
+          .attr("class", "tooltip")
+          .style("background-color", "gray")
+          .style("border-radius", "5px")
+          .style("padding", "10px")
+          .style("color", "white")
+    
+      // -2- Create 3 functions to show / update (when mouse move but stay on same circle) / hide the tooltip
+      const showTooltip = function(event, d) {
+        tooltip
+          .transition()
+          .duration(200)
+        tooltip
+          .style("opacity", 1)
+          .html("In " + d.DistrictName + " the number of victims is " + d.Victims + ".")
+          .style("left", (event.x)/2 + "px")
+          .style("top", (event.y)/2+30 + "px")
+      }
+      const moveTooltip = function(event, d) {
+        tooltip
+          .style("left", (event.x)/2+500 + "px")
+          .style("top", (event.y)/2+1800 + "px")
+      }
+      const hideTooltip = function(event, d) {
+        tooltip
+          .transition()
+          .duration(200)
+          .style("opacity", 0)
+      }
+    
+      // Add dots
+      svg2.append('g')
+        .selectAll("dot")
+        .data(data)
+        .join("circle")
+          .attr("class", "bubbles")
+          .attr("cx", d => x(d.Tot))
+          .attr("cy", d => y(d.Afternoon))
+          .attr("r", d => z(d.Victims))
+          .style("fill", "red")
+        // -3- Trigger the functions
+        .on("mouseover", showTooltip )
+        .on("mousemove", moveTooltip )
+        .on("mouseleave", hideTooltip )
+    
+      })
+    </script>
