@@ -8,22 +8,35 @@
     <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js" integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ==" crossorigin=""></script>
     <title>Document</title>
     <style>
-        #map {position: absolute; top: 80; bottom: 0; left: 0; right: 0; width: 600px; height: 600px; display: block;}
+        #map {position: relative; top: 80; bottom: 0; left: 0; right: 0; width: 600px; height: 600px; display: block;}
     </style>
 </head>
 <body>
     <div id = "map"></div>
     <script>
-        const bounds = L.latLngBounds(L.latLng(41.49983532494226,2.597236633300781), L.latLng(41.25974300098081,2.0259475708007817))
+        const bounds = L.latLngBounds(L.latLng(41.49,2.59), L.latLng(41.25,2.02))
         var map = L.map('map', { zoomControl: false }).setView([41.37, 2.1592], 12).setMaxBounds(bounds);
 
         L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
-            maxZoom: 18,
+            maxZoom: 14,
             minZoom: 12,
             id: 'mapbox/light-v10',
             tileSize: 512,
             zoomOffset: -1
         }).addTo(map);
+
+        let districts = {
+            'Nou Barris': 'nou-barris.json',
+            'Eixample': 'eixample.json',
+            'Ciutat Vella': 'ciutat-vella.json',
+            'Gràcia': 'gracia.json',
+            'Sant Martí': 'sant-marti.json',
+            'Sant Andreu': 'sant-andreu.json',
+            'Les Corts': 'les-corts.json',
+            'Horta-Guinardó': 'horta-guinardo.json',
+            'Sarrià-Sant Gervasi': 'sarria-sant-gervasi.json',
+            'Sants-Montjuïc': 'sants-montjuic.json',
+        }
     </script>
 </body>
 </html>
