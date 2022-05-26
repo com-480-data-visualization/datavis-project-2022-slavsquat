@@ -1,16 +1,13 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
 
-<!-- Load d3.js -->
 <script src="https://d3js.org/d3.v6.js"></script>
 
-<!-- Create a div where the graph will take place -->
-<div id="my_dataviz2"></div>
+<div id="bubblechart"></div>
 
-<!-- A bit of CSS: change stroke color of circle on hover (white -> black) -->
 <style>
   .bubbles {
-    stroke-width: 2px;
+    stroke-width: 3px;
     stroke: white;
   }
   .bubbles:hover {
@@ -20,23 +17,22 @@
 
 <script>
 
-    // set the dimensions and margins of the graph
-    const margin2 = {top: 10, right: 20, bottom: 30, left: 50},
-        width2 = 500 - margin2.left - margin2.right,
-        height2 = 420 - margin2.top - margin2.bottom;
+    const margin2 = {top: 30, right: 60, bottom: 30, left: 50},
+        width2 = 700 - margin2.left - margin2.right,
+        height2 = 500 - margin2.top - margin2.bottom;
     
-    // append the svg object to the body of the page
-    const svg2 = d3.select("#my_dataviz2")
+    // create the svg object
+    const svg2 = d3.select("#bubblechart")
       .append("svg")
-        .attr("width", width2 + margin2.left + margin2.right)
+        .attr("width", width2 )
         .attr("height", height2 + margin2.top + margin2.bottom)
       .append("g")
         .attr("transform", `translate(${margin2.left},${margin2.top})`);
     
-    //Read the data
+    // include the data
     d3.csv("data/accidents_bubble.csv").then( function(data) {
     
-      // Add X axis
+      // add x axis for the total number of accidents
       const x = d3.scaleLinear()
         .domain([200, 3600])
         .range([ 0, width2 ]);
@@ -45,7 +41,7 @@
         .call(d3.axisBottom(x))
         .style("color", "white");
     
-      // Add Y axis
+      // add y axis for the total number of accidents in the afternoon
       const y = d3.scaleLinear()
         .domain([100, 1700])
         .range([ height2, 0]);
@@ -53,46 +49,49 @@
         .call(d3.axisLeft(y))
         .style("color", "white");
     
-      // Add a scale for bubble size
+      // add the size of the bubbles for the number of victims
       const z = d3.scaleLinear()
         .domain([0, 2000])
         .range([ 4, 40]);
     
 
-      // -1- Create a tooltip div that is hidden by default:
-      const tooltip = d3.select("#my_dataviz2")
+      // create the tooltip cloud for the information printing
+      const tooltipCloud = d3.select("#bubblechart")
         .append("div")
           .style("opacity", 0)
           .attr("class", "tooltip")
           .style("background-color", "gray")
           .style("border-radius", "5px")
-          .style("padding", "10px")
+          .style("padding", "6px")
           .style("color", "white")
+          .style("border", "3px solid turquoise")
+          .style("color", "turquoise")
+          .style("font-family", "Montserrat")
     
-      // -2- Create 3 functions to show / update (when mouse move but stay on same circle) / hide the tooltip
-      const showTooltip = function(event, d) {
-        tooltip
+      // functions for showing, moving and hiding the tooltip cloud
+      const show = function(event, d) {
+        tooltipCloud
           .transition()
-          .duration(200)
-        tooltip
+        tooltipCloud
+        // define where the cloud will be positioned
           .style("opacity", 1)
           .html("In " + d.DistrictName + " the number of victims is " + d.Victims + ".")
           .style("left", (event.x)/2 + "px")
           .style("top", (event.y)/2+30 + "px")
       }
-      const moveTooltip = function(event, d) {
-        tooltip
+      // move the cloud with the mouse
+      const move = function(event, d) {
+        tooltipCloud
           .style("left", (event.x)/2+300 + "px")
           .style("top", (event.y)/2+3000 + "px")
       }
-      const hideTooltip = function(event, d) {
-        tooltip
+      const hide = function(event, d) {
+        tooltipCloud
           .transition()
-          .duration(200)
           .style("opacity", 0)
       }
     
-      // Add dots
+      // add the bubbles
       svg2.append('g')
         .selectAll("dot")
         .data(data)
@@ -102,10 +101,10 @@
           .attr("cy", d => y(d.Afternoon))
           .attr("r", d => z(d.Victims))
           .style("fill", "red")
-        // -3- Trigger the functions
-        .on("mouseover", showTooltip )
-        .on("mousemove", moveTooltip )
-        .on("mouseleave", hideTooltip )
+        // for calling the functions
+        .on("mouseover", show )
+        .on("mousemove", move )
+        .on("mouseleave", hide )
     
       })
     </script>
