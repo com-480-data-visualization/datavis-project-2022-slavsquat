@@ -60,7 +60,7 @@
                     <div class="content-box">
                         <h4>Welcome</h4>
                         <h1>This is why you should or should not live in Barcelona</h1>
-                        <p>We are providing you with several analyses from real data that can help you in making a decision whether you would like for Barcelona to be the next place you will call home </p>
+                        <p>We are providing you with several analyses from real data that can help you in making the decision whether you would like for Barcelona to be the next place you will call home </p>
                         <a href="#vis1" class="btn">Explore the visualisations</a>
                     </div>
                 </div>
@@ -68,18 +68,18 @@
         </div>
     </header>
 
-    <section class="about r-p" id="about">
-        <div class="container">
+    <section class="row justify-content-center" id="about">
+        <div class="row justify-content-center">
             <h2 class="text-center">ABOUT</h2>
-            <div class="row">
-                <div class="col-lg-6">
-                    <img src="images/barselona.jpeg" class="img-fluid img-thumbnail" alt="Barcelona picture">
-                    <p>Barcelona is a city on the coast of northeastern Spain </p>
-                    <p>It is the capital and largest city of the autonomous community of Catalonia, as well as the second most populous municipality of Spain. </p>
+            <div class="row justify-content-center">
+                <div class="col-md-9">
+                    <p>Barcelona is a city on the coast of northeastern Spain. It is the capital and largest city of the autonomous community of Catalonia, as well as the second most populous municipality of Spain.  </p>
+                    <img src="images/barcelonaaa.jpeg" class="img-fluid img-thumbnail" style="width: 450px; height: auto; align-items: center;"  alt="Barcelona picture">
                 </div>
-                <div class="col-lg-6">
-                    <h2>About Barcelona</h2>
-                    <h4>Bebes, nos vamos a Barcelona</h4>
+                <div class="col-lg-9">
+                    <h3 class="text-center">Barcelona districts</h3>
+                    <p>To conduct our analyses better, we focused the data around the ten districts of Barcelona. The districts are: Ciutat Vella, Eixample, Gracia, Horta-Guinardo, Les Corts, Nou Barris, Sant Andreu, Sant Marti, Sants-Montjuic, and Sarria-Sant Gervasi. We provide a map of districts so you can get familiar with their position.</p>
+                    <img src="images/districts.png" class="img-fluid img-thumbnail" style="width: 450px; height: auto; align-items: center;" alt="Districts">
                 </div>
             </div>
         </div>
@@ -88,9 +88,21 @@
     <section class="vis1 r-p" id="vis1">
         <div class="container">
             <h2 class="text-center">Accidents</h2>
-            <div class="row">
-                <div class="h-100 row align-items-center">
+            <div class="row justify-content-center">
+                <div class="col-lg-9">
+                    <p> On the pie chart below, you can preview the number of accidents that happened in specific districts. You can filter out the the accidents that happened throughout different parts of the day: Morning, Afternoon, and Night. It could be observed that the highest percentage value for accidents is for the Eixample district, the center district of Barcelona. </p>
                     <div id="includedContent"></div>
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="vis2 r-p" id="vis2">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-9">
+                    <p>On the bubble chart below, the x-axis represents the total number of accidents that happened in a district. On the other hand, we decided for the y-axis to be the accidents that happened in the afternoon since most accidents in Barcelona happened in the afternoon. The size of the bubbles, which represent different districts, is determined by the number of victims for accidents that happened in the afternoon. </p>
                     <div id="includedContent2"></div>
                 </div>
             </div>

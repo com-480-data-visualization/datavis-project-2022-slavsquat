@@ -6,13 +6,14 @@
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Montserrat',sans-serif;
     color: #fff;
+    padding-top: 100px;
 }
 
 p {
     font-family: 'Montserrat', sans-serif;
     font-size: 20px;
     line-height: 30px;
-    color: #6c757d;
+    color: #a4a8ac;
 }
 
 body {
