@@ -43,18 +43,20 @@
             'Sants-Montjuïc': 'sants-montjuic.json',
         }
 
-        function highlight(e, district, population, perHab) {
-            const tooltipCloud2 = d3.select("#map")
+        const tooltipCloud2 = d3.select("#map")
             .append("div")
             .style("opacity", 0)
             .attr("class", "tooltip")
-            .style("background-color", "gray")
+            .style("background-color", "lightgray")
              .style("border-radius", "5px")
              .style("padding", "6px")
             .style("color", "white")
-            .style("border", "3px solid turquoise")
-             .style("color", "turquoise")
+            .style("border", "3px solid purple")
+             .style("color", "purple")
              .style("font-family", "Montserrat")
+
+        function highlight(e, district, population, area, density, perHab) {
+            
 
              tooltipCloud2
           .transition()
@@ -62,7 +64,7 @@
           tooltipCloud2
         // define where the cloud will be positioned
           .style("opacity", 1)
-          .html("In " + district + " the population is " + population)
+          .html("In " + district + " the population is " + population + ", the total area is " + area + "km. The density is " + density + " per km^2.")
           .style("left", (event.x)/2 + "px")
           .style("top", (event.y)/2+30 + "px")
 
@@ -72,7 +74,7 @@
             let layer = e.target;
             let currColor = e.layer.options.color
             layer.setStyle({
-                weight:4,
+                weight:10,
                 fillColor: 'purple',
                 fillOpacity: 0.7
             });
@@ -80,12 +82,14 @@
         }
 
         function resetHighlight(e,district) {
+
             let layer = e.target;
             let currColor = e.layer.options.color
             districtColors[district] = currColor
             layer.setStyle({
-                weight:3,
-                fillColor: currColor,
+                weight:5,
+                color: 'green',
+                fillColor: 'green',
                 fillOpacity: 0.5
             });
             info.update();
@@ -100,12 +104,11 @@
                         .then(json => [json['geometry'],json['extratags']['population'],json['extratags']['area'],json['extratags']['neighborhoods'], json['extratags']['density']])
   
             let polygon = L.geoJSON(coords).addTo(map);
-            let perHab = filename.includes('population')
             console.log(population)
 
   // update the on mouseover and onclick for choropleth
             polygon.on({
-                mouseover: e => highlight(e,name,population,false),
+                mouseover: e => highlight(e,name,population,area,density,false),
                 mouseout: e => resetHighlight(e,name)
             });
 
@@ -125,40 +128,6 @@
         };
 
         let poly = f()
-
-        function numberWithSpaces(x) {
-            return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
-        }
-
-        poly.then(polygons => {
-            let viz = new DistrictViz(polygonsInfo,2)
-            for (const [district, obj] of Object.entries(polygonsInfo)) {
-                obj['polygon'].on('click', () => viz.onClick(district))
-                obj['polygon'].on('mouseover', () => viz.onHover(district))
-            }
-        });
-
-        let div = L.DomUtil.create('div', 'info legend bg-dark text-white')
-        let info = L.control({position: 'topleft'});
-
-        info.onAdd = function (map) {
-            console.log('njaao')
-            this._div = L.DomUtil.create('div', 'info bg-dark text-white text-center', L.DomUtil.get('')); // create a div with a class "info"
-            this.update();
-            return this._div;
-        };
-
-        info.update = function (district,perHabitant) {
-            let value = polygonValues[district];
-            console.log(this._div)
-            if(this._div){
-            console.log('ciao')
-            this._div.innerHTML =  (district ?
-                '<b>' + district + '</b><br />' + numberWithSpaces(value) +  " " +  $('#selectionBoxType option:selected').text() +
-                    (perHabitant ? " for " + PER_HABITANTS.toString()+ " inhabitants" : " ")
-            : '<b> Hover over a district </b>');
-            }
-        };
 
     </script>
 </body>

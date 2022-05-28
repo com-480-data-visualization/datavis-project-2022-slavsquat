@@ -9,9 +9,12 @@
   .bubbles {
     stroke-width: 3px;
     stroke: white;
+    fill: turquoise;
   }
   .bubbles:hover {
     stroke: turquoise;
+    background-color: turquoise;
+    background: turquoise;
   }
 </style>
 
@@ -60,12 +63,12 @@
         .append("div")
           .style("opacity", 0)
           .attr("class", "tooltip")
-          .style("background-color", "gray")
+          .style("background-color", "lightgray")
           .style("border-radius", "5px")
           .style("padding", "6px")
           .style("color", "white")
-          .style("border", "3px solid turquoise")
-          .style("color", "turquoise")
+          .style("border", "6px solid purple")
+          .style("color", "purple")
           .style("font-family", "Montserrat")
     
       // functions for showing, moving and hiding the tooltip cloud
@@ -100,7 +103,7 @@
           .attr("cx", d => x(d.Tot))
           .attr("cy", d => y(d.Afternoon))
           .attr("r", d => z(d.Victims))
-          .style("fill", "red")
+          .style("fill", "purple")
         // for calling the functions
         .on("mouseover", show )
         .on("mousemove", move )
