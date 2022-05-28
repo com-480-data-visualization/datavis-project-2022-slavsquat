@@ -67,7 +67,7 @@
              .style("color", "purple")
              .style("font-family", "Montserrat")
 
-        function highlight(e, district, population, area, density,neighborhoods,perHab) {
+        function highlight(e, district, population, area, density,neighborhoods,accidents,perHab) {
             
 
              tooltipCloud2
@@ -86,7 +86,7 @@
           tooltipCloud3
         // define where the cloud will be positioned
           .style("opacity", 1)
-          .html("Also, the total number of accidents for the " + neighborhoods + " neighborhoods in this district is")
+          .html("Also, the total number of accidents for the " + neighborhoods + " neighborhoods in this district is " + accidents)
           .style("left", (event.x)/2 + "px")
           .style("top", (event.y)/2+150 + "px")
 
@@ -118,15 +118,15 @@
 
         let loadPolygon = async (name, filename, polygons) => {
             // Load all informations inside the polygons geojson
-            let [coords, population, area, neighborhoods, density] =  await fetch(`json/${filename}`)
+            let [coords, population, area, neighborhoods, density, accidents] =  await fetch(`json/${filename}`)
                         .then(res => res.json())
-                        .then(json => [json['geometry'],json['extratags']['population'],json['extratags']['area'],json['extratags']['neighborhoods'], json['extratags']['density']])
+                        .then(json => [json['geometry'],json['extratags']['population'],json['extratags']['area'],json['extratags']['neighborhoods'], json['extratags']['density'], json['extratags']['accidents']])
   
             let polygon = L.geoJSON(coords).addTo(map);
 
   // update the on mouseover and onclick for choropleth
             polygon.on({
-                mouseover: e => highlight(e,name,population,area,density,neighborhoods,false),
+                mouseover: e => highlight(e,name,population,area,density,neighborhoods,accidents,false),
                 mouseout: e => resetHighlight(e,name)
             });
 

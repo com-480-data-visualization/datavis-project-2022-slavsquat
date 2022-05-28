@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css" integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ==" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js" integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ==" crossorigin=""></script>
+    <script src="https://d3js.org/d3.v6.js"></script>
+    <title>Document</title>
+    <style>
+        #map2 {position: relative; top: 80; bottom: 0; left: 0; right: 0; width: 600px; height: 600px; display: block;}
+    </style>
+    
+</head>
+<body>
+    <div id = "map2"></div>
+    
+    <script>
+        let transportData = null
+
+        d3.csv("data/transport_locations.csv").then( function(data) {
+            transportData = data
+
+        const bounds = L.latLngBounds(L.latLng(41.49,2.59), L.latLng(41.25,2.02))
+        var map2 = L.map('map2', { zoomControl: false }).setView([41.37, 2.1592], 12).setMaxBounds(bounds);
+        let polygonValues = {}
+        let polygonsInfo = {}
+        let districtColors = {}
+
+        L.tileLayer('https://api.maptiler.com/maps/streets/{z}/{x}/{y}.png?key=GmNQSlKUJLZrzxOJ75AM', {
+            attribution: '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>',
+            maxZoom: 16,
+            minZoom: 11,
+            id: 'mapbox/light-v10',
+            tileSize: 512,
+            zoomOffset: -1
+        }).addTo(map2);
+
+        var marker = L.marker([41.399203,2.11937], {radius:20}).addTo(map2);
+       
+        for (let i = 0; i<transportData.length; i++) {
+            var marker = L.marker([transportData[i].latitude,transportData[i].longitude], {radius:20}).addTo(map2);
+            marker.on('mouseover', function(e) {
+                // open popup
+                var popup = L.popup()
+                .setLatLng(e.latlng)
+                .setContent(transportData[i].type + " --- " + transportData[i].name)
+                .openOn(map2)
+            })
+        }
+    
+
+    
+    })
+
+
+
+
+
+    </script>
+</body>
+</html>
