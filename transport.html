@@ -37,10 +37,56 @@
             zoomOffset: -1
         }).addTo(map2);
 
-        var marker = L.marker([41.399203,2.11937], {radius:20}).addTo(map2);
        
         for (let i = 0; i<transportData.length; i++) {
-            var marker = L.marker([transportData[i].latitude,transportData[i].longitude], {radius:20}).addTo(map2);
+            var iconType = new L.Icon({
+                    iconUrl: 'images/marker-icon-2x-red.png',
+                    iconSize: [25, 41]
+                });
+            if (transportData[i].type == "Underground") {
+                iconType = new L.Icon({
+                    iconUrl: 'images/marker-icon-2x-black.png',
+                    iconSize: [25, 41]
+                });
+            } else if (transportData[i].type == "Railway (FGC)") {
+                iconType = new L.Icon({
+                    iconUrl: 'images/marker-icon-2x-green.png',
+                    iconSize: [25, 41]
+                });
+            } else if (transportData[i].type == "Tram") {
+                iconType = new L.Icon({
+                    iconUrl: 'images/marker-icon-2x-gold.png',
+                    iconSize: [25, 41]
+                });
+            } else if (transportData[i].type == "Maritime station") {
+                iconType = new L.Icon({
+                    iconUrl: 'images/marker-icon-2x-blue.png',
+                    iconSize: [25, 41]
+                });
+            } else if (transportData[i].type == "RENFE") {
+                iconType = new L.Icon({
+                    iconUrl: 'images/marker-icon-2x-orange.png',
+                    iconSize: [25, 41]
+                });
+            } else if (transportData[i].type == "Airport train") {
+                iconType = new L.Icon({
+                    iconUrl: 'images/marker-icon-2x-red.png',
+                    iconSize: [25, 41]
+                });
+            } else if (transportData[i].type == "Cableway") {
+                iconType = new L.Icon({
+                    iconUrl: 'images/marker-icon-2x-blue.png',
+                    iconSize: [25, 41]
+                });
+            } else {
+                iconType = new L.Icon({
+                    iconUrl: 'images/marker-icon-2x-yellow.png',
+                    iconSize: [25, 41]
+                });
+            }
+
+            var marker = L.marker([transportData[i].latitude,transportData[i].longitude], {icon:iconType}).addTo(map2);
+
             marker.on('mouseover', function(e) {
                 // open popup
                 var popup = L.popup()
