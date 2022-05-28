@@ -92,7 +92,6 @@
 
 
 
-            console.log(population)
             let layer = e.target;
             let currColor = e.layer.options.color
             layer.setStyle({
@@ -100,7 +99,6 @@
                 fillColor: 'purple',
                 fillOpacity: 0.7
             });
-            info.update(district,perHab)
         }
 
         function resetHighlight(e,district) {
@@ -114,7 +112,6 @@
                 fillColor: 'green',
                 fillOpacity: 0.5
             });
-            info.update();
         }
 
         map.getRenderer(map).options.padding = 0.5;
@@ -126,7 +123,6 @@
                         .then(json => [json['geometry'],json['extratags']['population'],json['extratags']['area'],json['extratags']['neighborhoods'], json['extratags']['density']])
   
             let polygon = L.geoJSON(coords).addTo(map);
-            console.log(population)
 
   // update the on mouseover and onclick for choropleth
             polygon.on({
