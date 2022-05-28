@@ -33,9 +33,10 @@ button {
 }
 
 .btn:hover {
-    color: black;
-    background-color: white;
+    color: red;
+    background-color: yellow;
     transition: .5s all;
+    border: 2px solid red;
 }
 
 .r-p {
@@ -69,8 +70,8 @@ nav .navbar-nav li {
 }
 
 nav.r-nav.stickyadd {
-    background: #fff !important;
-    padding: 15px 0;
+    background: lightgoldenrodyellow !important;
+    padding: 5px 0;
     box-shadow: 0 1px 8px 3px rgba(0, 0, 0, 0.05);
     transition: .5s all ease-in-out;
     opacity: 0.8;
