@@ -55,7 +55,19 @@
              .style("color", "purple")
              .style("font-family", "Montserrat")
 
-        function highlight(e, district, population, area, density, perHab) {
+             const tooltipCloud3 = d3.select("#map")
+            .append("div")
+            .style("opacity", 0)
+            .attr("class", "tooltip")
+            .style("background-color", "lightgray")
+             .style("border-radius", "5px")
+             .style("padding", "6px")
+            .style("color", "white")
+            .style("border", "3px solid purple")
+             .style("color", "purple")
+             .style("font-family", "Montserrat")
+
+        function highlight(e, district, population, area, density,neighborhoods,perHab) {
             
 
              tooltipCloud2
@@ -67,6 +79,16 @@
           .html("In " + district + " the population is " + population + ", the total area is " + area + "km. The density is " + density + " per km^2.")
           .style("left", (event.x)/2 + "px")
           .style("top", (event.y)/2+30 + "px")
+
+          tooltipCloud3
+          .transition()
+
+          tooltipCloud3
+        // define where the cloud will be positioned
+          .style("opacity", 1)
+          .html("Also, the total number of accidents for the " + neighborhoods + " neighborhoods in this district is")
+          .style("left", (event.x)/2 + "px")
+          .style("top", (event.y)/2+150 + "px")
 
 
 
@@ -108,7 +130,7 @@
 
   // update the on mouseover and onclick for choropleth
             polygon.on({
-                mouseover: e => highlight(e,name,population,area,density,false),
+                mouseover: e => highlight(e,name,population,area,density,neighborhoods,false),
                 mouseout: e => resetHighlight(e,name)
             });
 
