@@ -8,17 +8,14 @@
     <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js" integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ==" crossorigin=""></script>
     <title>Document</title>
     <style>
-        #map {position: relative; top: 80; bottom: 0; left: 0; right: 0; width: 600px; height: 600px; display: block;}
+        #map {position: relative; top: 80; bottom: 0; left: 0; right: 0; width: 800px; height: 600px; display: block;}
     </style>
 </head>
 <body>
     <div id = "map"></div>
     <script>
-        const PER_HABITANTS = 10000
-        const bounds = L.latLngBounds(L.latLng(41.49,2.59), L.latLng(41.25,2.02))
-        var map = L.map('map', { zoomControl: false }).setView([41.37, 2.1592], 12).setMaxBounds(bounds);
-        let polygonValues = {}
-        let polygonsInfo = {}
+        const frame = L.latLngBounds(L.latLng(41.49,2.59), L.latLng(41.25,2.02))
+        var map = L.map('map', { zoomControl: false }).setView([41.37, 2.1592], 12).setMaxBounds(frame);
         let districtColors = {}
 
         L.tileLayer('https://api.maptiler.com/maps/streets/{z}/{x}/{y}.png?key=GmNQSlKUJLZrzxOJ75AM', {
@@ -30,7 +27,7 @@
             zoomOffset: -1
         }).addTo(map);
 
-        let districts = {
+         pathsOfDistricts = {
             'Nou Barris': 'nou-barris.json',
             'Eixample': 'eixample.json',
             'Ciutat Vella': 'ciutat-vella.json',
@@ -48,65 +45,52 @@
             .style("opacity", 0)
             .attr("class", "tooltip")
             .style("background-color", "lightgray")
-             .style("border-radius", "5px")
-             .style("padding", "6px")
+            .style("border-radius", "5px")
+            .style("padding", "6px")
             .style("color", "white")
             .style("border", "3px solid purple")
-             .style("color", "purple")
-             .style("font-family", "Montserrat")
+            .style("color", "purple")
+            .style("font-family", "Montserrat")
 
              const tooltipCloud3 = d3.select("#map")
             .append("div")
             .style("opacity", 0)
             .attr("class", "tooltip")
             .style("background-color", "lightgray")
-             .style("border-radius", "5px")
-             .style("padding", "6px")
+            .style("border-radius", "5px")
+            .style("padding", "6px")
             .style("color", "white")
             .style("border", "3px solid purple")
-             .style("color", "purple")
-             .style("font-family", "Montserrat")
+            .style("color", "purple")
+            .style("font-family", "Montserrat")
 
-        function highlight(e, district, population, area, density,neighborhoods,accidents,perHab) {
+        function onhover(e, name, population, area, density,neighborhoods,accidents,perHab) {
             
+            tooltipCloud2
+                .transition()
+            tooltipCloud2
+                .style("opacity", 1)
+                .html("In " + name + " the population is " + population + ", the total area is " + area + "km. The density is " + density + " per km^2.")
+                .style("left", (event.x)/2 + "px")
+                .style("top", (event.y)/2+30 + "px")
 
-             tooltipCloud2
-          .transition()
+            tooltipCloud3
+                .transition()
+            tooltipCloud3
+                .style("opacity", 1)
+                .html("Also, the total number of accidents for the " + neighborhoods.length + " neighborhoods in this district is " + accidents)
+                .style("left", (event.x)/2 + "px")
+                .style("top", (event.y)/2+150 + "px")
 
-          tooltipCloud2
-        // define where the cloud will be positioned
-          .style("opacity", 1)
-          .html("In " + district + " the population is " + population + ", the total area is " + area + "km. The density is " + density + " per km^2.")
-          .style("left", (event.x)/2 + "px")
-          .style("top", (event.y)/2+30 + "px")
-
-          tooltipCloud3
-          .transition()
-
-          tooltipCloud3
-        // define where the cloud will be positioned
-          .style("opacity", 1)
-          .html("Also, the total number of accidents for the " + neighborhoods + " neighborhoods in this district is " + accidents)
-          .style("left", (event.x)/2 + "px")
-          .style("top", (event.y)/2+150 + "px")
-
-
-
-            let layer = e.target;
-            let currColor = e.layer.options.color
-            layer.setStyle({
+            e.target.setStyle({
                 weight:10,
                 fillColor: 'purple',
                 fillOpacity: 0.7
             });
         }
 
-        function resetHighlight(e,district) {
-
-            let layer = e.target;
-            let currColor = e.layer.options.color
-            districtColors[district] = currColor
-            layer.setStyle({
+        function onremovemouse(e) {
+            e.target.setStyle({
                 weight:5,
                 color: 'green',
                 fillColor: 'green',
@@ -114,38 +98,28 @@
             });
         }
 
-        map.getRenderer(map).options.padding = 0.5;
-
-        let loadPolygon = async (name, filename, polygons) => {
-            // Load all informations inside the polygons geojson
-            let [coords, population, area, neighborhoods, density, accidents] =  await fetch(`json/${filename}`)
+        let includePoly = async (district, pathPolygon, polygons) => {
+            let [coordinates, population, area, neighborhoods, density, accidents] =  await fetch(`json/${pathPolygon}`)
                         .then(res => res.json())
                         .then(json => [json['geometry'],json['extratags']['population'],json['extratags']['area'],json['extratags']['neighborhoods'], json['extratags']['density'], json['extratags']['accidents']])
   
-            let polygon = L.geoJSON(coords).addTo(map);
-
-  // update the on mouseover and onclick for choropleth
-            polygon.on({
-                mouseover: e => highlight(e,name,population,area,density,neighborhoods,accidents,false),
-                mouseout: e => resetHighlight(e,name)
+            let currPoly = L.geoJSON(coordinates).addTo(map);
+            currPoly.on({
+                mouseover: e => onhover(e,district,population,area,density,neighborhoods,accidents,false),
+                mouseout: e => onremovemouse(e,district)
             });
-
-  // create a dict of polygons, to which we add the values for all districts, used by DistrictViz in district.js
-            polygons[name] = polygon;
-            polygonsInfo[name] = {polygon:polygon, population:population, area:area, neighborhoods:neighborhoods, density:density};
-            polygonValues[name] = 0
-
+            polygons[district] = currPoly;
         }
 
-        let f = async function() {
-            let polygons = {};
-            for (const [name, filename] of Object.entries(districts)) {
-                await loadPolygon(name, filename, polygons);
+        let polygonsDrawing = async function() {
+            let listPolygons = {};
+            for (const [district, pathPolygon] of Object.entries(pathsOfDistricts)) {
+                await includePoly(district, pathPolygon, listPolygons);
             }
-            return polygons;
+            return listPolygons;
         };
 
-        let poly = f()
+        let poly = polygonsDrawing()
 
     </script>
 </body>

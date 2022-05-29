@@ -9,7 +9,7 @@
     <script src="https://d3js.org/d3.v6.js"></script>
     <title>Document</title>
     <style>
-        #map2 {position: relative; top: 80; bottom: 0; left: 0; right: 0; width: 600px; height: 600px; display: block;}
+        #map2 {position: relative; top: 80; bottom: 0; left: 0; right: 0; width: 800px; height: 600px; display: block;}
     </style>
     
 </head>
@@ -91,12 +91,42 @@
                 // open popup
                 var popup = L.popup()
                 .setLatLng(e.latlng)
-                .setContent(transportData[i].type + " --- " + transportData[i].name)
+                .setContent("Type: " + transportData[i].type + " <br> Name:" + transportData[i].name)
                 .openOn(map2)
             })
         }
-    
 
+        const pathsOfDistricts = {
+            'Nou Barris': 'nou-barris.json',
+            'Eixample': 'eixample.json',
+            'Ciutat Vella': 'ciutat-vella.json',
+            'Gràcia': 'gracia.json',
+            'Sant Martí': 'sant-marti.json',
+            'Sant Andreu': 'sant-andreu.json',
+            'Les Corts': 'les-corts.json',
+            'Horta-Guinardó': 'horta-guinardo.json',
+            'Sarrià-Sant Gervasi': 'sarria-sant-gervasi.json',
+            'Sants-Montjuïc': 'sants-montjuic.json',
+        }
+    
+        let includePoly = async (district, pathPolygon, polygons) => {
+            let [coordinates, population, area, neighborhoods, density, accidents] =  await fetch(`json/${pathPolygon}`)
+                        .then(res => res.json())
+                        .then(json => [json['geometry'],json['extratags']['population'],json['extratags']['area'],json['extratags']['neighborhoods'], json['extratags']['density'], json['extratags']['accidents']])
+  
+            let currPoly = L.geoJSON(coordinates).addTo(map2);
+            polygons[district] = currPoly;
+        }
+
+        let polygonsDrawing = async function() {
+            let listPolygons = {};
+            for (const [district, pathPolygon] of Object.entries(pathsOfDistricts)) {
+                await includePoly(district, pathPolygon, listPolygons);
+            }
+            return listPolygons;
+        };
+
+        let poly = polygonsDrawing()
     
     })
 
