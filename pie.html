@@ -32,14 +32,21 @@
     .style("font-family", "Montserrat")
 
   const show2 = function (event, d) {
+    console.log(d.data[1][1])
     tooltipCloud4
       .transition()
     tooltipCloud4
       // define where the cloud will be positioned
       .style("opacity", 1)
-      .html("In.")
+      .html("District: " + d.data[1][1])
       .style("left", (event.x) / 2 + "px")
       .style("top", (event.y) / 2 + 30 + "px")
+  }
+
+  const move2 = function (event, d) {
+    tooltipCloud4
+      .style("left", (event.x) / 2 + 300 + "px")
+      .style("top", (event.y) / 2 + 3300 + "px")
   }
 
 
@@ -51,9 +58,9 @@
     .attr("transform", `translate(${width / 2}, ${height / 2})`);
 
   // create the data variables from accidents_part_of_the_day.csv
-  const data1 = { CV: 211, E: 1194, G: 199, HG: 306, LC: 284, NB: 200, SA: 227, SM: 558, SMo: 464, SSG: 411 }
-  const data2 = { CV: 292, E: 1478, G: 267, HG: 352, LC: 378, NB: 280, SA: 308, SM: 632, SMo: 509, SSG: 574 }
-  const data3 = { CV: 97, E: 357, G: 65, HG: 85, LC: 64, NB: 62, SA: 62, SM: 146, SMo: 131, SSG: 119 }
+  const data1 = { CV: [211, 'Ciutat Vella'], E: [1194, 'Eixample'], G: [199, 'Gracia'], HG: [306, 'Horta Guinardo'], LC: [284, 'Les Corts'], NB: [200, 'Nou Barris'], SA: [227, 'Sant Andreu'], SM: [558, 'Sant Marti'], SMo: [464, 'Sants-Montjuic'], SSG: [411, 'Sarria-Sant Gervasi'] }
+  const data2 = { CV: [292, 'Ciutat Vella'], E: [1478, 'Eixample'], G: [267, 'Gracia'], HG: [352, 'Horta Guinardo'], LC: [378, 'Les Corts'], NB: [280, 'Nou Barris'], SA: [308, 'Sant Andreu'], SM: [632, 'Sant Marti'], SMo: [509, 'Sants-Montjuic'], SSG: [574, 'Sarria-Sant Gervasi'] }
+  const data3 = { CV: [97, 'Ciutat Vella'], E: [357, 'Eixample'], G: [65, 'Gracia'], HG: [85, 'Horta Guinardo'], LC: [64, 'Les Corts'], NB: [62, 'Nou Barris'], SA: [62, 'Sant Andreu'], SM: [146, 'Sant Marti'], SMo: [131, 'Sants-Montjuic'], SSG: [119, 'Sarria-Sant Gervasi'] }
 
   // choose the colors
   const color = d3.scaleOrdinal()
@@ -74,7 +81,7 @@
 
     // find values of pie pieces and positions
     const pie = d3.pie()
-      .value(function (piepiece) { return piepiece[1]; })
+      .value(function (piepiece) { return piepiece[1][0]; })
     const data_ready = pie(Object.entries(data))
 
     // extract the data
@@ -95,6 +102,7 @@
       .attr("stroke", "white")
       .style("stroke-width", "2px")
       .style("opacity", 1)
+      
 
 
 
@@ -103,19 +111,21 @@
       .selectAll('piePieces')
       .data(data_ready)
       .join('text')
-      .text(function (piepiece) { return piepiece.data[0] + ": " + piepiece.data[1] })
+      .text(function (piepiece) { return piepiece.data[0] + ": " + piepiece.data[1][0] })
       .attr("transform", function (piepiece) { return `translate(${arcGen2.centroid(piepiece)})` })
       .style("text-anchor", "middle")
       .style("font-size", 17)
+      .on("mouseover", show2)
+      .on("mousemove", move2)
 
 
-    svg.append('g')
+    svg
       .selectAll('piePieces')
       .data(data_ready)
       .join('path')
       .on("mouseover", show2)
-
-
+      .on("mousemove", move2)
+      
 
   }
 

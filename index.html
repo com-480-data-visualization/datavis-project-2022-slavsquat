@@ -85,7 +85,7 @@
         <div class="row justify-content-center">
             <h2 class="text-center">ABOUT</h2>
             <div class="row justify-content-center">
-                <div class="col-md-9">
+                <div class="col-lg-9">
                     <p>Barcelona is a city on the coast of northeastern Spain. It is the capital and largest city of the autonomous community of Catalonia, as well as the second most populous municipality of Spain.  </p>
                     <img src="images/barcelonaaa.jpeg" class="img-fluid img-thumbnail" style="width: 450px; height: auto; align-items: center;"  alt="Barcelona picture">
                 </div>
@@ -98,12 +98,26 @@
         </div>
     </section>
 
+    <section class="vis3 r-p" id="vis3">
+        <div class="container">
+            <h2 class="text-center">ACCIDENTS</h2>
+            <div class="row justify-content-center">
+                <div class="col-lg-9">
+                    <p>For better understanding of the visualizations, it is crucial to get familiar with district details in numbers.</p>
+                    <p>Preview of the map with the highlighted districts could be obtained below, with the information from the dataset. On the hovered district you can obtain the information about the area of the district, its total population, its population density, the name of all neighborhoods inside the district, and the total number of accidents.</p>
+                    <div id="includedContent3"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section class="vis1 r-p" id="vis1">
         <div class="container">
-            <h2 class="text-center">Accidents</h2>
             <div class="row justify-content-center">
                 <div class="col-lg-9">
                     <p> On the pie chart below, you can preview the number of accidents that happened in specific districts. You can filter out the the accidents that happened throughout different parts of the day: Morning, Afternoon, and Night. It could be observed that the highest percentage value for accidents is for the Eixample district, the center district of Barcelona. </p>
+                    <p> We can see that Eixample takes the largest proportion of accidents. But, how much does the pie chart takes into consideration the size of the districts and its population density?</p>
+                    <h3>SELECT THE PART OF THE DAY</h3>
                     <div id="includedContent"></div>
                     
                 </div>
@@ -116,18 +130,8 @@
             <div class="row justify-content-center">
                 <div class="col-lg-9">
                     <p>On the bubble chart below, the x-axis represents the total number of accidents that happened in a district. On the other hand, we decided for the y-axis to represent the density of population in the specific district. The size of the bubbles, which represent different districts, is determined by the number of victims for accidents that happened in the afternoon. </p>
+                    <p>The result is quite expected, Eixample has the highest number of victims since its population and population density is the biggest. However, we can see that Gracia, Ciutat Vella, Sant Andreu, and Nou Barris have lower number of victims than the districts the smaller population density.  </p>
                     <div id="includedContent2"></div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="vis3 r-p" id="vis3">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-9">
-                    <p>Preview of the map with the highlighted districts could be obtained below, with the information from the dataset. On the hovered district you can obtain the information about the area of the district, its total population, its population density, the name of all neighborhoods inside the district, and the total number of accidents.</p>
-                    <div id="includedContent3"></div>
                 </div>
             </div>
         </div>
@@ -135,7 +139,7 @@
 
     <section class="vis4 r-p" id="vis4">
         <div class="container">
-            <h2 class="text-center">Transport</h2>
+            <h2 class="text-center">TRANSPORT</h2>
             <div class="row justify-content-center">
                 <div class="col-lg-9">
                     <p>The map of all transport stations in Barcelona is represented below. Also, for the sake of a better overview, we divided Barcelona in districts, once again. Furthermore, each type of transport has its own color, and hovering over the marker on the map will give you the station's type and name.</p>
