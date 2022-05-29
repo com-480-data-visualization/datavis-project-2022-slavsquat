@@ -17,7 +17,7 @@
         margin = 40;
     
     
-    const radius = Math.min(width, height) / 2 - margin;
+    const radius = 260;
     
     
     const svg = d3.select("#pie")
@@ -49,12 +49,12 @@
     // the function that is used to create the pie chart
     function update(data) {
     
-      // Compute the position of each group on the pie:
+      // find values of pie pieces and positions
       const pie = d3.pie()
         .value(function(piepiece) {return piepiece[1]; })
       const data_ready = pie(Object.entries(data))
     
-      // map to data
+      // extract the data
       const u = svg.selectAll("path")
         .data(data_ready)
     
