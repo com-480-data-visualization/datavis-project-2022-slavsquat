@@ -11,81 +11,114 @@
 
 <script>
 
-    // https://d3-graph-gallery.com/
-    const width = 600,
-        height = 600,
-        margin = 40;
-    
-    
-    const radius = 260;
-    
-    
-    const svg = d3.select("#pie")
-      .append("svg")
-        .attr("width", width)
-        .attr("height", height)
-      .append("g")
-        .attr("transform", `translate(${width/2}, ${height/2})`);
-    
-    // create the data variables from accidents_part_of_the_day.csv
-    const data1 = {CV: 211, E: 1194, G:199, HG:306, LC:284, NB:200, SA:227, SM:558, SMo:464, SSG:411}
-    const data2 = {CV: 292, E: 1478, G:267, HG:352, LC:378, NB:280, SA:308, SM:632, SMo:509, SSG:574}
-    const data3 = {CV: 97, E: 357, G:65, HG:85, LC:64, NB:62, SA:62, SM:146, SMo:131, SSG:119}
-    
-    // choose the colors
-    const color = d3.scaleOrdinal()
-      .range(["#1f77b4","#ff7f0e","#2ca02c","#d62728","#9467bd","#8c564b","#e377c2","#7f7f7f","#bcbd22","#17becf"]);
+  // https://d3-graph-gallery.com/
+  const width = 600,
+    height = 600,
+    margin = 40;
 
-      // for the arcs
-    var arcGen = d3.arc()
-        .innerRadius(0)
-        .outerRadius(radius)
 
-        // build the arcs for the labels, for the text
-    var arcGen2 = d3.arc()
-        .innerRadius(0)
-        .outerRadius(radius*1.55)
-    
-    // the function that is used to create the pie chart
-    function update(data) {
-    
-      // find values of pie pieces and positions
-      const pie = d3.pie()
-        .value(function(piepiece) {return piepiece[1]; })
-      const data_ready = pie(Object.entries(data))
-    
-      // extract the data
-      const u = svg.selectAll("path")
-        .data(data_ready)
-    
-      // part where we build our pie chart
-      svg
-  .selectAll('piePieces')
-  .data(data_ready)
-  .join('path')
-  .merge(u)
-    .transition()
-    .duration(1000)
-    .attr('d', arcGen)
-    .attr('fill', function(piepiece){ return(color(piepiece.data[0])) })
-    .attr("stroke", "white")
-    .style("stroke-width", "2px")
-    .style("opacity", 1)
+  const radius = 260;
+
+  const tooltipCloud4 = d3.select("#pie")
+    .append("div")
+    .style("opacity", 0)
+    .attr("class", "tooltip")
+    .style("background-color", "lightgray")
+    .style("border-radius", "5px")
+    .style("padding", "6px")
+    .style("color", "white")
+    .style("border", "6px solid purple")
+    .style("color", "purple")
+    .style("font-family", "Montserrat")
+
+  const show2 = function (event, d) {
+    tooltipCloud4
+      .transition()
+    tooltipCloud4
+      // define where the cloud will be positioned
+      .style("opacity", 1)
+      .html("In.")
+      .style("left", (event.x) / 2 + "px")
+      .style("top", (event.y) / 2 + 30 + "px")
+  }
+
+
+  const svg = d3.select("#pie")
+    .append("svg")
+    .attr("width", width)
+    .attr("height", height)
+    .append("g")
+    .attr("transform", `translate(${width / 2}, ${height / 2})`);
+
+  // create the data variables from accidents_part_of_the_day.csv
+  const data1 = { CV: 211, E: 1194, G: 199, HG: 306, LC: 284, NB: 200, SA: 227, SM: 558, SMo: 464, SSG: 411 }
+  const data2 = { CV: 292, E: 1478, G: 267, HG: 352, LC: 378, NB: 280, SA: 308, SM: 632, SMo: 509, SSG: 574 }
+  const data3 = { CV: 97, E: 357, G: 65, HG: 85, LC: 64, NB: 62, SA: 62, SM: 146, SMo: 131, SSG: 119 }
+
+  // choose the colors
+  const color = d3.scaleOrdinal()
+    .range(["#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#9467bd", "#8c564b", "#e377c2", "#7f7f7f", "#bcbd22", "#17becf"]);
+
+  // for the arcs
+  var arcGen = d3.arc()
+    .innerRadius(0)
+    .outerRadius(radius)
+
+  // build the arcs for the labels, for the text
+  var arcGen2 = d3.arc()
+    .innerRadius(0)
+    .outerRadius(radius * 1.55)
+
+  // the function that is used to create the pie chart
+  function update(data) {
+
+    // find values of pie pieces and positions
+    const pie = d3.pie()
+      .value(function (piepiece) { return piepiece[1]; })
+    const data_ready = pie(Object.entries(data))
+
+    // extract the data
+    const u = svg.selectAll("path")
+      .data(data_ready)
+
+    // part where we build our pie chart
+    svg
+      .selectAll('piePieces')
+      .data(data_ready)
+      .join('path')
+      .merge(u)
+
+      .transition()
+      .duration(1000)
+      .attr('d', arcGen)
+      .attr('fill', function (piepiece) { return (color(piepiece.data[0])) })
+      .attr("stroke", "white")
+      .style("stroke-width", "2px")
+      .style("opacity", 1)
+
 
 
     // add the text to the pie pieces
     svg
-  .selectAll('piePieces')
-  .data(data_ready)
-  .join('text')
-  .text(function(piepiece){ return piepiece.data[0] + ": " + piepiece.data[1]})
-  .attr("transform", function(piepiece) { return `translate(${arcGen2.centroid(piepiece)})`})
-  .style("text-anchor", "middle")
-  .style("font-size", 17)
+      .selectAll('piePieces')
+      .data(data_ready)
+      .join('text')
+      .text(function (piepiece) { return piepiece.data[0] + ": " + piepiece.data[1] })
+      .attr("transform", function (piepiece) { return `translate(${arcGen2.centroid(piepiece)})` })
+      .style("text-anchor", "middle")
+      .style("font-size", 17)
 
-    
-    }
-    
-    // Initialize the plot with the first dataset
-    update(data1)
-    </script>
+
+    svg.append('g')
+      .selectAll('piePieces')
+      .data(data_ready)
+      .join('path')
+      .on("mouseover", show2)
+
+
+
+  }
+
+  // Initialize the plot with the first dataset
+  update(data1)
+</script>

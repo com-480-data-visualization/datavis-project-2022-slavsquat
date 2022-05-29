@@ -1,20 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css" integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ==" crossorigin="" />
-    <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js" integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ==" crossorigin=""></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css"
+        integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ=="
+        crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js"
+        integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ=="
+        crossorigin=""></script>
     <title>Document</title>
     <style>
-        #map {position: relative; top: 80; bottom: 0; left: 0; right: 0; width: 800px; height: 600px; display: block;}
+        #map {
+            position: relative;
+            top: 80;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            width: 800px;
+            height: 600px;
+            display: block;
+        }
     </style>
 </head>
+
 <body>
-    <div id = "map"></div>
+    <div id="map"></div>
     <script>
-        const frame = L.latLngBounds(L.latLng(41.49,2.59), L.latLng(41.25,2.02))
+        const frame = L.latLngBounds(L.latLng(41.49, 2.59), L.latLng(41.25, 2.02))
         var map = L.map('map', { zoomControl: false }).setView([41.37, 2.1592], 12).setMaxBounds(frame);
         let districtColors = {}
 
@@ -27,7 +42,7 @@
             zoomOffset: -1
         }).addTo(map);
 
-         pathsOfDistricts = {
+        pathsOfDistricts = {
             'Nou Barris': 'nou-barris.json',
             'Eixample': 'eixample.json',
             'Ciutat Vella': 'ciutat-vella.json',
@@ -52,7 +67,7 @@
             .style("color", "purple")
             .style("font-family", "Montserrat")
 
-             const tooltipCloud3 = d3.select("#map")
+        const tooltipCloud3 = d3.select("#map")
             .append("div")
             .style("opacity", 0)
             .attr("class", "tooltip")
@@ -64,26 +79,26 @@
             .style("color", "purple")
             .style("font-family", "Montserrat")
 
-        function onhover(e, name, population, area, density,neighborhoods,accidents,perHab) {
-            
+        function onhover(e, name, population, area, density, neighborhoods, accidents, perHab) {
+
             tooltipCloud2
                 .transition()
             tooltipCloud2
                 .style("opacity", 1)
                 .html("In " + name + " the population is " + population + ", the total area is " + area + "km. The density is " + density + " per km^2.")
-                .style("left", (event.x)/2 + "px")
-                .style("top", (event.y)/2+30 + "px")
+                .style("left", (event.x) / 2 + "px")
+                .style("top", (event.y) / 2 + 30 + "px")
 
             tooltipCloud3
                 .transition()
             tooltipCloud3
                 .style("opacity", 1)
                 .html("Also, the total number of accidents for the " + neighborhoods.length + " neighborhoods in this district is " + accidents)
-                .style("left", (event.x)/2 + "px")
-                .style("top", (event.y)/2+150 + "px")
+                .style("left", (event.x) / 2 + "px")
+                .style("top", (event.y) / 2 + 150 + "px")
 
             e.target.setStyle({
-                weight:10,
+                weight: 10,
                 fillColor: 'purple',
                 fillOpacity: 0.7
             });
@@ -91,7 +106,7 @@
 
         function onremovemouse(e) {
             e.target.setStyle({
-                weight:5,
+                weight: 5,
                 color: 'green',
                 fillColor: 'green',
                 fillOpacity: 0.5
@@ -99,19 +114,19 @@
         }
 
         let includePoly = async (district, pathPolygon, polygons) => {
-            let [coordinates, population, area, neighborhoods, density, accidents] =  await fetch(`json/${pathPolygon}`)
-                        .then(res => res.json())
-                        .then(json => [json['geometry'],json['extratags']['population'],json['extratags']['area'],json['extratags']['neighborhoods'], json['extratags']['density'], json['extratags']['accidents']])
-  
+            let [coordinates, population, area, neighborhoods, density, accidents] = await fetch(`json/${pathPolygon}`)
+                .then(res => res.json())
+                .then(json => [json['geometry'], json['extratags']['population'], json['extratags']['area'], json['extratags']['neighborhoods'], json['extratags']['density'], json['extratags']['accidents']])
+
             let currPoly = L.geoJSON(coordinates).addTo(map);
             currPoly.on({
-                mouseover: e => onhover(e,district,population,area,density,neighborhoods,accidents,false),
-                mouseout: e => onremovemouse(e,district)
+                mouseover: e => onhover(e, district, population, area, density, neighborhoods, accidents, false),
+                mouseout: e => onremovemouse(e, district)
             });
             polygons[district] = currPoly;
         }
 
-        let polygonsDrawing = async function() {
+        let polygonsDrawing = async function () {
             let listPolygons = {};
             for (const [district, pathPolygon] of Object.entries(pathsOfDistricts)) {
                 await includePoly(district, pathPolygon, listPolygons);
@@ -123,4 +138,5 @@
 
     </script>
 </body>
+
 </html>

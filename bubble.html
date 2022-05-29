@@ -11,6 +11,7 @@
     stroke: white;
     fill: turquoise;
   }
+
   .bubbles:hover {
     stroke: turquoise;
     background-color: turquoise;
@@ -20,94 +21,94 @@
 
 <script>
 
-    const margin2 = {top: 30, right: 60, bottom: 30, left: 50},
-        width2 = 700 - margin2.left - margin2.right,
-        height2 = 500 - margin2.top - margin2.bottom;
-    
-    // create the svg object
-    const svg2 = d3.select("#bubblechart")
-      .append("svg")
-        .attr("width", width2 )
-        .attr("height", height2 + margin2.top + margin2.bottom)
-      .append("g")
-        .attr("transform", `translate(${margin2.left},${margin2.top})`);
-    
-    // include the data
-    d3.csv("data/accidents_bubble.csv").then( function(data) {
-    
-      // add x axis for the total number of accidents
-      const x = d3.scaleLinear()
-        .domain([200, 3600])
-        .range([ 0, width2 ]);
-      svg2.append("g")
-        .attr("transform", `translate(0, ${height2})`)
-        .call(d3.axisBottom(x))
-        .style("color", "white");
-    
-      // add y axis for the total number of accidents in the afternoon
-      const y = d3.scaleLinear()
-        .domain([100, 1700])
-        .range([ height2, 0]);
-      svg2.append("g")
-        .call(d3.axisLeft(y))
-        .style("color", "white");
-    
-      // add the size of the bubbles for the number of victims
-      const z = d3.scaleLinear()
-        .domain([0, 2000])
-        .range([ 4, 40]);
-    
+  const margin2 = { top: 30, right: 60, bottom: 30, left: 50 },
+    width2 = 700 - margin2.left - margin2.right,
+    height2 = 500 - margin2.top - margin2.bottom;
 
-      // create the tooltip cloud for the information printing
-      const tooltipCloud = d3.select("#bubblechart")
-        .append("div")
-          .style("opacity", 0)
-          .attr("class", "tooltip")
-          .style("background-color", "lightgray")
-          .style("border-radius", "5px")
-          .style("padding", "6px")
-          .style("color", "white")
-          .style("border", "6px solid purple")
-          .style("color", "purple")
-          .style("font-family", "Montserrat")
-    
-      // functions for showing, moving and hiding the tooltip cloud
-      const show = function(event, d) {
-        tooltipCloud
-          .transition()
-        tooltipCloud
+  // create the svg object
+  const svg2 = d3.select("#bubblechart")
+    .append("svg")
+    .attr("width", width2)
+    .attr("height", height2 + margin2.top + margin2.bottom)
+    .append("g")
+    .attr("transform", `translate(${margin2.left},${margin2.top})`);
+
+  // include the data
+  d3.csv("data/accidents_bubble.csv").then(function (data) {
+
+    // add x axis for the total number of accidents
+    const x = d3.scaleLinear()
+      .domain([200, 3600])
+      .range([0, width2]);
+    svg2.append("g")
+      .attr("transform", `translate(0, ${height2})`)
+      .call(d3.axisBottom(x))
+      .style("color", "white");
+
+    // add y axis for the total density
+    const y = d3.scaleLinear()
+      .domain([5500, 38000])
+      .range([height2, 0]);
+    svg2.append("g")
+      .call(d3.axisLeft(y))
+      .style("color", "white");
+
+    // add the size of the bubbles for the number of victims
+    const z = d3.scaleLinear()
+      .domain([0, 2000])
+      .range([4, 40]);
+
+
+    // create the tooltip cloud for the information printing
+    const tooltipCloud = d3.select("#bubblechart")
+      .append("div")
+      .style("opacity", 0)
+      .attr("class", "tooltip")
+      .style("background-color", "lightgray")
+      .style("border-radius", "5px")
+      .style("padding", "6px")
+      .style("color", "white")
+      .style("border", "6px solid purple")
+      .style("color", "purple")
+      .style("font-family", "Montserrat")
+
+    // functions for showing, moving and hiding the tooltip cloud
+    const show = function (event, d) {
+      tooltipCloud
+        .transition()
+      tooltipCloud
         // define where the cloud will be positioned
-          .style("opacity", 1)
-          .html("In " + d.DistrictName + " the number of victims is " + d.Victims + ".")
-          .style("left", (event.x)/2 + "px")
-          .style("top", (event.y)/2+30 + "px")
-      }
-      // move the cloud with the mouse
-      const move = function(event, d) {
-        tooltipCloud
-          .style("left", (event.x)/2+300 + "px")
-          .style("top", (event.y)/2+3000 + "px")
-      }
-      const hide = function(event, d) {
-        tooltipCloud
-          .transition()
-          .style("opacity", 0)
-      }
-    
-      // add the bubbles
-      svg2.append('g')
-        .selectAll("dot")
-        .data(data)
-        .join("circle")
-          .attr("class", "bubbles")
-          .attr("cx", d => x(d.Tot))
-          .attr("cy", d => y(d.Afternoon))
-          .attr("r", d => z(d.Victims))
-          .style("fill", "purple")
-        // for calling the functions
-        .on("mouseover", show )
-        .on("mousemove", move )
-        .on("mouseleave", hide )
-    
-      })
-    </script>
+        .style("opacity", 1)
+        .html("In " + d.DistrictName + " the number of victims is " + d.Victims + ".<br> The total number of accidents is " + d.Tot + ", and the density of populations is " + d.Afternoon + ".")
+        .style("left", (event.x) / 2 + "px")
+        .style("top", (event.y) / 2 + 30 + "px")
+    }
+    // move the cloud with the mouse
+    const move = function (event, d) {
+      tooltipCloud
+        .style("left", (event.x) / 2 + 300 + "px")
+        .style("top", (event.y) / 2 + 3000 + "px")
+    }
+    const hide = function (event, d) {
+      tooltipCloud
+        .transition()
+        .style("opacity", 0)
+    }
+
+    // add the bubbles
+    svg2.append('g')
+      .selectAll("dot")
+      .data(data)
+      .join("circle")
+      .attr("class", "bubbles")
+      .attr("cx", d => x(d.Tot))
+      .attr("cy", d => y(d.Afternoon))
+      .attr("r", d => z(d.Victims))
+      .style("fill", "purple")
+      // for calling the functions
+      .on("mouseover", show)
+      .on("mousemove", move)
+      .on("mouseleave", hide)
+
+  })
+</script>
