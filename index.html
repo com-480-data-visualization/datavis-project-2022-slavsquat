@@ -33,6 +33,11 @@
           $("#includedContent4").load("transport.html"); 
         });
     </script> 
+    <script> 
+        $(function(){
+          $("#includedContent5").load("population_bubbles.html"); 
+        });
+    </script> 
     <title>¿Move to Barcelona?</title>
     <link rel="shortcut icon" type="image/jpg" href="images/flag-400.png"/>
 </head>
@@ -74,7 +79,7 @@
                         <h4>Welcome</h4>
                         <h1>This is why you should or should not live in <span>Barcelona</span></h1>
                         <p>We are providing you with several analyses from real data that can help you in making the decision whether you would like for Barcelona to be the next place you will call home </p>
-                        <a href="#vis1" class="buttonExplore">Explore the visualisations</a>
+                        <a href="#vis3" class="buttonExplore">Explore the visualisations</a>
                     </div>
                 </div>
             </div>
@@ -93,6 +98,17 @@
                     <h3 class="text-center">Barcelona districts</h3>
                     <p>To conduct our analyses better, we focused the data around the ten districts of Barcelona. The districts are: Ciutat Vella, Eixample, Gracia, Horta-Guinardo, Les Corts, Nou Barris, Sant Andreu, Sant Marti, Sants-Montjuic, and Sarria-Sant Gervasi. We provide a map of districts so you can get familiar with their position.</p>
                     <img src="images/districts.png" class="img-fluid img-thumbnail" style="width: 450px; height: auto; align-items: center;" alt="Districts">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="vis5 r-p" id="vis5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-9">
+                    <p>Also, we are providing an interesting circular packing that shows how many people live in different neighborhoods in the mentioned 10 districts. Each bubble color represents a different district. Hover effect over a bubble gives you full information about the population.</p>
+                    <div id="includedContent5"></div>
                 </div>
             </div>
         </div>

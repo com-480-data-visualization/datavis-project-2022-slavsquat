@@ -1,0 +1,157 @@
+
+<!DOCTYPE html>
+<meta charset="utf-8">
+<script src="https://d3js.org/d3.v6.js"></script>
+
+<button onclick="update(dataPath1)" class="btn">2017</button>
+<button onclick="update(dataPath2)" class="btn">2016</button>
+<button onclick="update(dataPath3)" class="btn">2015</button>
+<button onclick="update(dataPath4)" class="btn">2014</button>
+<button onclick="update(dataPath5)" class="btn">2013</button>
+
+<div id="moving_bubbles"></div>
+
+
+<script>
+// https://d3-graph-gallery.com/graph/circularpacking_template.html
+
+const dataPath1 = "data/population_neighborhoods_2017.csv";
+const dataPath2 = "data/population_neighborhoods_2016.csv";
+const dataPath3 = "data/population_neighborhoods_2015.csv";
+const dataPath4 = "data/population_neighborhoods_2014.csv";
+const dataPath5 = "data/population_neighborhoods_2013.csv";
+
+const width5 = 950
+const height5 = 550
+
+const tooltip = d3.select("#moving_bubbles")
+        .append("div")
+        .style("opacity", 0)
+        .attr("class", "tooltip")
+        .style("background-color", "lightgray")
+        .style("color", "purple")
+        .style("border", "6px solid purple")
+        .style("border-radius", "5px")
+        .style("padding", "6px")
+        .style("width","600px")
+        .style("font-family","Montserrat")
+
+function update(data){
+
+  d3.select("svg").remove()
+
+  const svg5 = d3.select("#moving_bubbles")
+      .append("svg")
+      .style("position", "block")
+      .style("background-color", "black")
+        .attr("width", width5)
+        .attr("height", height5)
+        .attr("transform", `translate(0, 15)`)
+       // .style("viewBox"="0 0 100 100")
+
+
+        svg5.append("circle").attr("cx",800).attr("cy",130).attr("r", 6).style("fill", "#1f77b4")
+        svg5.append("circle").attr("cx",800).attr("cy",150).attr("r", 6).style("fill", "#ff7f0e")
+        svg5.append("circle").attr("cx",800).attr("cy",170).attr("r", 6).style("fill", "#2ca02c")
+        svg5.append("circle").attr("cx",800).attr("cy",190).attr("r", 6).style("fill", "#d62728")
+        svg5.append("circle").attr("cx",800).attr("cy",210).attr("r", 6).style("fill", "#9467bd")
+        svg5.append("circle").attr("cx",800).attr("cy",230).attr("r", 6).style("fill", "#8c564b")
+        svg5.append("circle").attr("cx",800).attr("cy",250).attr("r", 6).style("fill", "#e377c2")
+        svg5.append("circle").attr("cx",800).attr("cy",270).attr("r", 6).style("fill", "#7f7f7f")
+        svg5.append("circle").attr("cx",800).attr("cy",290).attr("r", 6).style("fill", "#bcbd22")
+        svg5.append("circle").attr("cx",800).attr("cy",310).attr("r", 6).style("fill", "#17becf")
+        
+        svg5.append("text").attr("x", 820).attr("y", 130).text("Nou Barris").style("font-size", "15px").style("fill", "white").attr("alignment-baseline","middle")
+        svg5.append("text").attr("x", 820).attr("y", 150).text("Eixample").style("font-size", "15px").style("fill", "white").attr("alignment-baseline","middle")
+        svg5.append("text").attr("x", 820).attr("y", 170).text("Ciutat Vella").style("font-size", "15px").style("fill", "white").attr("alignment-baseline","middle")
+        svg5.append("text").attr("x", 820).attr("y", 190).text("Gràcia").style("font-size", "15px").style("fill", "white").attr("alignment-baseline","middle")
+        svg5.append("text").attr("x", 820).attr("y", 210).text("Sant Martí").style("font-size", "15px").style("fill", "white").attr("alignment-baseline","middle")
+        svg5.append("text").attr("x", 820).attr("y", 230).text("Sant Andreu").style("font-size", "15px").style("fill", "white").attr("alignment-baseline","middle")
+        svg5.append("text").attr("x", 820).attr("y", 250).text("Les Corts").style("font-size", "15px").style("fill", "white").attr("alignment-baseline","middle")
+        svg5.append("text").attr("x", 820).attr("y", 270).text("Horta-Guinardó").style("font-size", "15px").style("fill", "white").attr("alignment-baseline","middle")
+        svg5.append("text").attr("x", 820).attr("y", 290).text("Sarrià-Sant Gervasi").style("font-size", "15px").style("fill", "white").attr("alignment-baseline","middle")
+        svg5.append("text").attr("x", 820).attr("y", 310).text("Sants-Montjuïc").style("font-size", "15px").style("fill", "white").attr("alignment-baseline","middle")
+
+
+    d3.csv(data).then( function(population) {
+    
+      const color = d3.scaleOrdinal()
+        .domain(["Nou Barris", "Eixample", "Ciutat Vella", "Gràcia", "Sant Martí", "Sant Andreu", "Les Corts", "Horta-Guinardó", "Sarrià-Sant Gervasi", "Sants-Montjuïc"])
+        .range(d3.schemeCategory10);
+    
+      
+      const size = d3.scaleLinear()
+        .domain([0, 20000])
+        .range([5,15])  
+  
+    
+      
+      const hover = function(event, d) {
+        tooltip
+          .style("opacity", 1)
+      }
+      const move = function(event, d) {
+        tooltip
+        .html("In neighborhood " + d.name + " within district "+d.district+ " live " + d.number + " people.")
+          .style("left", (event.x/2+150) + "px")
+          .style("top", (event.y/2+2300) + "px")
+      }
+      var leave = function(event, d) {
+        tooltip
+          .style("opacity", 0)
+      }
+    
+      var node = svg5.append("g")
+        .selectAll("circle")
+        .data(population)
+        .join("circle")
+          .attr("class", "node")
+          .attr("r", d => size(d.number))
+          .attr("cx", width5 / 2)
+          .attr("cy", height5 / 2)
+          .style("fill", d => color(d.district))
+          .on("mouseover", hover) 
+          .on("mousemove", move)
+          .on("mouseleave", leave)
+          .call(d3.drag() 
+               .on("start", drag)
+               .on("drag", drag_item)
+               .on("end", simulate));
+    
+      
+      const animation = d3.forceSimulation()
+          .force("center", d3.forceCenter().x(width5 / 2).y(height / 2)) 
+          .force("charge", d3.forceManyBody().strength(.1)) 
+          .force("collide", d3.forceCollide().strength(.2).radius(function(d){ return (size(d.number)+3) }).iterations(1))
+    
+      
+          animation
+          .nodes(population)
+          .on("tick", function(d){
+            node
+                .attr("cx", d => d.x)
+                .attr("cy", d => d.y)
+          });
+    
+        
+        function drag(event, d) {
+            if (!event.active) animation.alphaTarget(.03).restart();
+            d.fx = d.x;
+            d.fy = d.y;
+        }
+        function drag_item(event, d) {
+            d.fx = event.x;
+            d.fy = event.y;
+        }
+        function simulate(event, d) {
+            if (!event.active) animation.alphaTarget(.03);
+            d.fx = null;
+            d.fy = null;
+        }
+      
+    
+    })
+}
+
+update(dataPath1);
+    </script>
