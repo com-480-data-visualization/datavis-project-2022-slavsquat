@@ -29,6 +29,7 @@
 <body>
     <div id="map"></div>
     <script>
+        // idea for drawing the boundaries and districts, with the district files https://github.com/com-480-data-visualization/data-visualization-project-2021-zozo
         const frame = L.latLngBounds(L.latLng(41.49, 2.59), L.latLng(41.25, 2.02))
         var map = L.map('map', { zoomControl: false }).setView([41.37, 2.1592], 12).setMaxBounds(frame);
         let districtColors = {}
