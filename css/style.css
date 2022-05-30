@@ -3,10 +3,107 @@
     padding: 0;
 }
 
-h1, h2, h3, h4, h5, h6 {
-    font-family: 'Montserrat',sans-serif;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Montserrat', sans-serif;
     color: #fff;
     padding-top: 100px;
+}
+
+span {
+    animation: color-change2 2s infinite;
+    border-radius: 10px;
+}
+
+/* https://jsfiddle.net/willwood/gjf139z4/5/ FOR THE BUTTON PULSE */
+
+.buttonExplore {
+    width: 400px;
+    padding: 10px;
+    box-shadow: 0 0 0 0 rgba(232, 76, 61, 0.7);
+    border: 3px solid yellow !important;
+    border-radius: 10px;
+    background-color: #FF0000;
+    -webkit-animation: pulsing 1.25s infinite cubic-bezier(0.66, 0, 0, 1);
+    -moz-animation: pulsing 1.25s infinite cubic-bezier(0.66, 0, 0, 1);
+    -ms-animation: pulsing 1.25s infinite cubic-bezier(0.66, 0, 0, 1);
+    animation: pulsing 1.25s infinite cubic-bezier(0.66, 0, 0, 1);
+    font-size: 22px;
+    color: yellow !important;
+    transition: all 300ms ease-in-out;
+    font-family: 'Montserrat', sans-serif;
+  }
+  
+  a.buttonExplore:hover {
+    -webkit-animation: none;
+    -moz-animation: none;
+    -ms-animation: none;
+    animation: none;
+    color: red !important;
+    border: 3px solid red !important;
+    background-color: yellow !important;
+  }
+  
+  @-webkit-keyframes pulsing {
+    to {
+      box-shadow: 0 0 0 30px rgba(232, 76, 61, 0);
+    }
+  }
+  
+  @-moz-keyframes pulsing {
+    to {
+      box-shadow: 0 0 0 30px rgba(232, 76, 61, 0);
+    }
+  }
+  
+  @-ms-keyframes pulsing {
+    to {
+      box-shadow: 0 0 0 30px rgba(232, 76, 61, 0);
+    }
+  }
+  
+  @keyframes pulsing {
+    to {
+      box-shadow: 0 0 0 30px rgba(232, 76, 61, 0);
+    }
+  }
+
+@keyframes color-change {
+    0% {
+        color: red;
+    }
+
+    50% {
+        color: yellow;
+    }
+
+    100% {
+        color: red;
+    }
+}
+
+@keyframes color-change2 {
+    0% {
+        color: red;
+        background-color: yellow;
+        border: 2px solid red;
+    }
+
+    50% {
+        color: yellow;
+        background-color: red;
+        border: 2px solid yellow;
+    }
+
+    100% {
+        color: red;
+        background-color: yellow;
+        border: 2px solid red;
+    }
 }
 
 p {
@@ -99,7 +196,7 @@ nav.stickyadd .hamburger {
 header {
     height: 100vh;
     width: 100%;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),url('../images/barselona.jpeg');
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../images/barselona.jpeg');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -134,7 +231,7 @@ header {
     padding: 5px 25px;
 }
 
-.content-box a:hover{
+.content-box a:hover {
     color: black;
     background-color: white;
     transition: .5s all;
@@ -145,4 +242,3 @@ header {
 }
 
 /* about */
-
