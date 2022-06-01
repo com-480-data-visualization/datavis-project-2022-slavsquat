@@ -36,13 +36,14 @@
     tooltipCloud4
       .transition()
     tooltipCloud4
-      // define where the cloud will be positioned
+      // where will the cloud appear
       .style("opacity", 1)
       .html("District: " + d.data[1][1])
       .style("left", (event.x) / 2 + "px")
       .style("top", (event.y) / 2 + 30 + "px")
   }
 
+  // what happens if we move the mouse
   const move2 = function (event, d) {
     tooltipCloud4
       .style("left", (event.x) / 2 + 300 + "px")
@@ -50,6 +51,7 @@
   }
 
 
+  // draw the initial pie
   const svg = d3.select("#pie")
     .append("svg")
     .attr("width", width)
@@ -71,7 +73,7 @@
     .innerRadius(0)
     .outerRadius(radius)
 
-  // build the arcs for the labels, for the text
+  // build the arcs for the labels, for the text, the outerradius is bigger so the text does not overlap
   var arcGen2 = d3.arc()
     .innerRadius(0)
     .outerRadius(radius * 1.55)
@@ -94,7 +96,6 @@
       .data(data_ready)
       .join('path')
       .merge(u)
-
       .transition()
       .duration(1000)
       .attr('d', arcGen)
@@ -102,9 +103,6 @@
       .attr("stroke", "white")
       .style("stroke-width", "2px")
       .style("opacity", 1)
-      
-
-
 
     // add the text to the pie pieces
     svg
@@ -119,14 +117,13 @@
       .on("mousemove", move2)
 
 
+    // define what happens on hover actions
     svg
       .selectAll('piePieces')
       .data(data_ready)
       .join('path')
       .on("mouseover", show2)
       .on("mousemove", move2)
-      
-
   }
 
   // Initialize the plot with the first dataset

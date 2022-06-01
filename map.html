@@ -30,19 +30,25 @@
     <div id="map"></div>
     <script>
         // idea for drawing the boundaries and districts, with the district files https://github.com/com-480-data-visualization/data-visualization-project-2021-zozo
-        const frame = L.latLngBounds(L.latLng(41.49, 2.59), L.latLng(41.25, 2.02))
+        const frame = L.latLngBounds(L.latLng(41.49, 2.59), L.latLng(41.25, 2.02)) // boundaries for Barcelona
+        // bound the map with the frame
         var map = L.map('map', { zoomControl: false }).setView([41.37, 2.1592], 12).setMaxBounds(frame);
-        let districtColors = {}
 
+        // tileLayer from leaflet is the key element for drawing the map
         L.tileLayer('https://api.maptiler.com/maps/streets/{z}/{x}/{y}.png?key=GmNQSlKUJLZrzxOJ75AM', {
+            // get the attribution for the chosen map
             attribution: '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>',
+            // define the max zoom value
             maxZoom: 16,
+            // define the min zoom value
             minZoom: 11,
-            id: 'mapbox/light-v10',
+            // set the tile size
             tileSize: 512,
+            // and the zoom offset
             zoomOffset: -1
         }).addTo(map);
 
+        // select the district files as json
         pathsOfDistricts = {
             'Nou Barris': 'nou-barris.json',
             'Eixample': 'eixample.json',
@@ -56,6 +62,7 @@
             'Sants-Montjuïc': 'sants-montjuic.json',
         }
 
+        // create the tooltipCloud for displatying the first part of information
         const tooltipCloud2 = d3.select("#map")
             .append("div")
             .style("opacity", 0)
@@ -68,6 +75,7 @@
             .style("color", "purple")
             .style("font-family", "Montserrat")
 
+        // create the tooltipCloud for displaying the second part of information
         const tooltipCloud3 = d3.select("#map")
             .append("div")
             .style("opacity", 0)
@@ -80,6 +88,7 @@
             .style("color", "purple")
             .style("font-family", "Montserrat")
 
+        // define what will happen on hover over district
         function onhover(e, name, population, area, density, neighborhoods, accidents, perHab) {
 
             tooltipCloud2
@@ -98,6 +107,7 @@
                 .style("left", (event.x) / 2 + "px")
                 .style("top", (event.y) / 2 + 150 + "px")
 
+            // set the style of the district
             e.target.setStyle({
                 weight: 10,
                 fillColor: 'purple',
@@ -106,6 +116,7 @@
         }
 
         function onremovemouse(e) {
+            // set the style of district as ALREADY VISITED
             e.target.setStyle({
                 weight: 5,
                 color: 'green',
@@ -114,27 +125,34 @@
             });
         }
 
+        //function to include the polygon on the image
         let includePoly = async (district, pathPolygon, polygons) => {
             let [coordinates, population, area, neighborhoods, density, accidents] = await fetch(`json/${pathPolygon}`)
                 .then(res => res.json())
+                // extract all the necessary information from the json about the district
                 .then(json => [json['geometry'], json['extratags']['population'], json['extratags']['area'], json['extratags']['neighborhoods'], json['extratags']['density'], json['extratags']['accidents']])
 
+            // draw the coordinates on the map
             let currPoly = L.geoJSON(coordinates).addTo(map);
+            // define the hover methods
             currPoly.on({
                 mouseover: e => onhover(e, district, population, area, density, neighborhoods, accidents, false),
                 mouseout: e => onremovemouse(e, district)
             });
-            polygons[district] = currPoly;
         }
 
         let polygonsDrawing = async function () {
+            // initialize the list of the polygons
             let listPolygons = {};
+            // iterate over districts
             for (const [district, pathPolygon] of Object.entries(pathsOfDistricts)) {
+                // call the includePoly function for drawing the districts
                 await includePoly(district, pathPolygon, listPolygons);
             }
+            // return the final list of polygons
             return listPolygons;
         };
-
+        // define all the districts
         let poly = polygonsDrawing()
 
     </script>
