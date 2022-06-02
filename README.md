@@ -24,7 +24,7 @@ After finishing the Milestone 3, we have sucessfully designed a web presentation
 
 📓 [Process book]()
 
-🎥 [Screencast]()
+🎥 [Screencast](assets/screencast.mov)
 
 🖥️ [Final website](https://com-480-data-visualization.github.io/datavis-project-2022-slavsquat/)
 
