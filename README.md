@@ -22,7 +22,7 @@ Results of this milestone provide a clear overview of the project goals. Further
 
 After finishing the Milestone 3, we have sucessfully designed a web presentation on the topic why you should or should not move to Barcelona. We hope our visitors will find it insightful enough!
 
-📓 [Process book](assets/¿Move to Barcelona?.pdf)
+📓 [Process book](assets/Move_to_Barcelona.pdf)
 
 🎥 [Screencast](assets/screencast.mov)
 
