@@ -20,6 +20,14 @@ Results of this milestone provide a clear overview of the project goals. Further
 
 ### **🏝 Milestone 3 (due 3rd of June 17:00)**
 
+After finishing the Milestone 3, we have sucessfully designed a web presentation on the topic why you should or should not move to Barcelona. We hope our visitors will find it insightful enough!
+
+📓 [Process book]()
+
+🎥 [Screencast]()
+
+🖥️ [Final website](https://com-480-data-visualization.github.io/datavis-project-2022-slavsquat/)
+
 ## Running the project
 
 For running our website a series of steps should be performed in order to easily preview the visualizations:
