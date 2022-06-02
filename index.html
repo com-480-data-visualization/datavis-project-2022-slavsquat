@@ -38,6 +38,11 @@
           $("#includedContent5").load("population_bubbles.html"); 
         });
     </script> 
+    <script> 
+        $(function(){
+            $("#includedContent6").load("migration.html"); 
+        });
+    </script>
     <title>¿Move to Barcelona?</title>
     <link rel="shortcut icon" type="image/jpg" href="images/flag-400.png"/>
 </head>
@@ -64,7 +69,7 @@
                         <a href="#vis4" class="nav-link">Transportos</a>
                     </li>
                     <li class="nav-item">
-                        <a href="" class="nav-link">Unemploymentos</a>
+                        <a href="#vis6" class="nav-link">Migration</a>
                     </li>
                 </ul>
             </div>
@@ -160,6 +165,18 @@
                 <div class="col-lg-9">
                     <p>The map of all transport stations in Barcelona is represented below. Also, for the sake of a better overview, we divided Barcelona in districts, once again. Furthermore, each type of transport has its own color, and hovering over the marker on the map will give you the station's type and name.</p>
                     <div id="includedContent4"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="vis6 r-p" id="vis6">
+        <div class="container">
+            <h2 class="text-center">MIGRATION</h2>
+            <div class="row justify-content-center">
+                <div class="col-lg-9">
+                    <p>The sankey diagram below represents the level and destination of migration from Barcelona. Nodes of the diagram are filled with flags of the destination regions. </p>
+                    <div id="includedContent6"></div>
                 </div>
             </div>
         </div>

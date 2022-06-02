@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script src="js/sankey.js"></script>
+
+<div id="sankey"></div>
+
+<style>
+.node rect {
+  cursor: move;
+  fill-opacity: .9;
+  shape-rendering: crispEdges;
+}
+
+.node text {
+  pointer-events: none;
+  text-shadow: 0 1px 0 #fff;
+}
+
+.link {
+  fill: none;
+  stroke: #fff; 
+  stroke-opacity: .2;
+}
+
+.link:hover {
+  stroke-opacity: .5;
+}
+
+.nodes {
+  fill:#fff
+}
+
+</style>
+
+<script>
+
+const units = "people";
+  
+var formatNumber = d3.format(",.0f"),    // zero decimal places
+      format = function(d) { return formatNumber(d) + " " + units; },
+      color6 = d3.scaleOrdinal(d3.schemeCategory10);
+
+  //define margins
+  const margin6 = {top: 10, right: 10, bottom: 10, left: 10},
+    //width = 700 - margin.left - margin.right,
+    //height = 300 - margin.top - margin.bottom;
+    width6=900,
+    height6=600;
+
+  // create the svg object
+  const svg6 = d3.select("#sankey")
+    .append("svg")
+    .attr("width", width6 + margin6.left + margin6.right)
+    .attr("height", height6 + margin6.top + margin6.bottom)
+    .append("g")
+    .attr("transform", `translate(${margin6.left},${margin6.top})`)
+
+  //set sankey diagram parameters
+  var sankey = d3.sankey()
+    .nodeWidth(60)
+    .nodePadding(20)
+    .size([width6, height6]);
+
+  var path = sankey.link();
+
+  // load the data
+//d3.csv("data/immigrants_emigrants_from_barcelona.csv", function(data) {
+  d3.csv("data/immigrants_emigrants_from_barcelona.csv").then(function(data) {
+
+  //graph for storing all the information
+  graph = {"nodes" : [], "links" : []};
+
+  //filling graph, nodes (from,to) and links (from->to,weight)
+  data.forEach(function (d) {
+
+    graph.nodes.push({ "name": d.from });
+    graph.nodes.push({ "name": d.to });
+    graph.links.push({ "source": d.from,
+                       "target": d.to,
+                       "value": + d.weight });
+   });
+
+  // return only the distinct / unique nodes
+  //TODO
+  graph.nodes = graph.nodes.map(x=>x.name).filter((value, index, self) => self.indexOf(value) === index);
+
+  // loop through each link replacing the text with its index from node
+  graph.links.forEach(function (d, i) {
+    graph.links[i].source = graph.nodes.indexOf(graph.links[i].source);
+    graph.links[i].target = graph.nodes.indexOf(graph.links[i].target);
+  });
+
+  // now loop through each nodes to make nodes an array of objects
+  // rather than an array of strings
+  graph.nodes.forEach(function (d, i) {
+    graph.nodes[i] = { "name": d };
+  });
+
+   sankey
+      .nodes(graph.nodes)
+      .links(graph.links)
+      .layout(32);
+
+  // add in the links
+  var link = svg6.append("g")
+        .selectAll(".link")
+        .data(graph.links)
+        .enter()
+        .append("path")
+        .attr("class", "link")
+        .attr("d", path)
+        .style("stroke-width", function(d) { return Math.max(1, d.dy); })
+        .sort(function(a, b) { return b.dy - a.dy; });
+
+  // // add the link titles
+  link.append("title")
+        .text(function(d) {
+    		return d.source.name + " → " + 
+                d.target.name + "\n" + format(d.value); });
+
+  // add in the nodes
+  var node = svg6.append("g").selectAll(".node")
+      .data(graph.nodes)
+      .enter().append("g")
+      .attr("class", "node")
+      .attr("transform", function(d) {return "translate(" + d.x + "," + d.y + ")"; })
+      .call(d3.drag().subject(function(d) {return d;})
+        .on("start", function() {this.parentNode.appendChild(this);})
+        .on("drag", dragmove));
+  
+  // patterns for images
+  const wh=1;
+  node.append("defs")
+      .append("pattern").attr("id",function(d){ return d.name.split(' ')[0]}).attr("width",wh).attr("height",wh).attr("patternContentUnits","objectBoundingBox")
+      .append("image").attr("preserveAspectRatio","none").attr("width",wh).attr("height",wh).attr("href",function(d){return "images/flags/"+d.name+".svg"})
+      //.attr("x",0.2).attr("y",0.2)
+      //.attr("transform","translate(0,50)")
+  // add the rectangles for the nodes
+ 
+  node.append("rect")
+      .attr("height", function(d) { return d.dy+10;})
+      .attr("width", sankey.nodeWidth())
+    //.style("fill", function(d) {
+		//   return color6(d.name.replace(/ .*/, ""));
+    // })
+      .style("fill",function(d){ return "url(#"+d.name.split(' ')[0]+")"})
+      //.style("stroke", function(d) {return d3.rgb(d.color).darker(2); })
+      .style("stroke","white")
+      .append("title")
+      .text(function(d) { return d.name ; });
+            //+ "\n" + format(d.value)
+            
+  // node.append("rect")
+  //     .attr("height", function(d) { return d.dy; })
+  //     .attr("width", sankey.nodeWidth());
+  
+
+  // add in the title for the nodes
+  node.append("text")
+      .attr("x", -6)
+      .attr("y", function(d) { return d.dy / 2; })
+      .attr("dy", ".35em")
+      .attr("class", "nodes")
+      .attr("text-anchor", "end")
+      .attr("transform", null)
+      .text(function(d) { return d.name; })
+    .filter(function(d) { return d.x < width6 / 2; })
+      .attr("x", 6 + sankey.nodeWidth())
+      .attr("text-anchor", "start");
+
+  // the function for moving the nodes
+  function dragmove(d) {
+    d3.select(this)
+      .attr("transform", 
+            "translate(" 
+               + d.x + "," 
+               + (d.y = Math.max(
+                  0, Math.min(d3.event.y))
+                 ) + ")");
+    sankey.relayout();
+    link.attr("d", path);
+  }
+  
+});
+  
+</script>
