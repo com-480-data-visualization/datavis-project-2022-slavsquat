@@ -166,13 +166,15 @@ d3.sankey = function() {
 
   //
   function computeNodeDepths(iterations) {
-    var nodesByBreadth = d3.nest()
-        .key(function(d) { return d.x; })
-        .sortKeys(d3.ascending)
-        .entries(nodes)
-        .map(function(d) { return d.values; });
-
-    //
+    //sort nodes by x value
+    var nodesByBreadth=d3.groups(nodes, d=>d.x).sort((a, b) => d3.ascending(a[0], b[0])).map(d=>d[1]);
+    // version v4
+    // var nodesByBreadth = d3.nest()
+    //     .key(function(d) { return d.x; })
+    //     .sortKeys(d3.ascending)
+    //     .entries(nodes)
+    //     .map(function(d) { return d.values; });
+    
     initializeNodeDepth();
     resolveCollisions();
     for (var alpha = 1; iterations > 0; --iterations) {
